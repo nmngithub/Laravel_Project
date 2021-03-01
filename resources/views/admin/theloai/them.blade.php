@@ -39,6 +39,7 @@
                         <input class="form-control" name="Ten" placeholder="Nhập tên thể loại" />
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
                 <form>
             </div>
         </div>

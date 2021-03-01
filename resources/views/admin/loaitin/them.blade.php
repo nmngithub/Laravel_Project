@@ -40,6 +40,7 @@
                         <input class="form-control" name="Ten" placeholder="Nhập tên loại tin" />
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>
+                    <button type="reset" class="btn btn-default">Reset</button>
                 <form>
             </div>
         </div>

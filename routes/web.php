@@ -11,7 +11,8 @@ use App\Http\Controllers\LoaiTinController;
 use App\Http\Controllers\TinTucController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SlideController;
-
+use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,18 +58,36 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('them',[TinTucController::class, 'getThem']);
         Route::post('them',[TinTucController::class, 'postThem']);
 
-        Route::get('sua',[TinTucController::class, 'getSua']);
-        Route::post('sua',[TinTucController::class, 'postSua']);
+        Route::get('sua/{id}',[TinTucController::class, 'getSua']);
+        Route::post('sua/{id}',[TinTucController::class, 'postSua']);
+
+        Route::get('xoa/{id}', [TinTucController::class, 'getXoa']);
     });
+
+    Route::group(['prefix'=>'comment'],function(){
+       Route::get('xoa/{id}/{idTinTuc}', [CommentController::class, 'getXoa']);
+    });
+
+    Route::group(['prefix'=>'slide'], function(){
+        Route::get('danhsach',[SlideController::class, 'getDanhSach']);
+
+        Route::get('them',[SlideController::class, 'getThem']);
+        Route::post('them',[SlideController::class, 'postThem']);
+
+        Route::get('sua/{id}',[SlideController::class, 'getSua']);
+        Route::post('sua/{id}',[SlideController::class, 'postSua']);
+
+        Route::get('xoa/{id}', [SlideController::class, 'getXoa']);
+    });
+
     Route::group(['prefix'=>'users'], function(){
         Route::get('danhsach',[UsersController::class, 'getDanhSach']);
         Route::get('them',[UsersController::class, 'getThem']);
         Route::get('sua',[UsersController::class, 'getSua']);
     });
-    Route::group(['prefix'=>'slide'], function(){
-        Route::get('danhsach',[SlideController::class, 'getDanhSach']);
-        Route::get('them',[SlideController::class, 'getThem']);
-        Route::get('sua',[SlideController::class, 'getSua']);
-    });
+    
 
+    Route::group(['prefix'=>'ajax'], function(){
+        Route::get('loaitin/{idTheLoai}',[AjaxController::class, 'getLoaiTin']);
+    });
 });

@@ -10,6 +10,12 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+            @if (session('thongbao'))
+                <div class="alert alert-success">
+                    {{session('thongbao')}}
+                </div>
+            @endif
+
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
@@ -43,8 +49,8 @@
                                 @endif
                             </td>
 
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin.theloai.xoa"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin.theloai.sua">Edit</a></td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/tintuc/xoa/{{$item->id}}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/sua/{{$item->id}}}">Edit</a></td>
                         </tr>
                     @endforeach
                     

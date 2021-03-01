@@ -9,13 +9,15 @@
                     <small>List</small>
                 </h1>
             </div>
-            <div class="row"><div class="col-sm-6"><div class="dataTables_length" id="dataTables-example_length"><label>Show <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-6"><div id="dataTables-example_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example"></label></div></div></div>
             <!-- /.col-lg-12 -->
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Tên</th>
+                        <th>Hình</th>
+                        <th>Nội Dung</th>
+                        <th>Link</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
@@ -26,8 +28,13 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$item->id}}</td>
                             <td>{{$item->Ten}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin.theloai.xoa"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin.theloai.sua">Edit</a></td>
+                            <td>
+                                <img width="600px" src="upload/slide/{{$item->Hinh}}" alt="">
+                            </td>
+                            <td>{{$item->NoiDung}}</td>
+                            <td>{{$item->link}}</td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/slide/xoa/{{$item->id}}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/slide/sua/{{$item->id}}">Edit</a></td>
                         </tr>
                     @endforeach
                     
