@@ -25,12 +25,11 @@ class SlideController extends Controller
         ],
         [
             'Ten.required'=>'Bạn chưa nhập tên!',
-            'Ten.unique'=>'Tên thể loại đã tồn tại!',
+            'Ten.unique'=>'Tên slide đã tồn tại!',
             'Ten.min'=>'Tên phải từ 3 đến 100 ký tự!',
             'Ten.max'=>'Tên phải từ 3 đến 100 ký tự!',
             'NoiDung.required'=>'Bạn chưa nhập tên!',
-            'NoiDung.unique'=>'Tên thể loại đã tồn tại!',
-            'NoiDung.min'=>'Tên phải từ 3 đến 100 ký tự!',
+            'NoiDung.min'=>'Tên phải từ 3 ký tự trở lên!',
         ]);
 
         $slide = new Slide;
@@ -65,6 +64,41 @@ class SlideController extends Controller
     }
 
     public function getSua($id){
-        
+        $slide = Slide::find($id);
+        return view('admin/slide/sua',['slide'=>$slide]);
+    }
+
+    public function postSua(Request $req, $id){
+        $slide = Slide::find($id);
+        $slide->Ten = $req->Ten;
+        $slide->NoiDung = $req->NoiDung;
+        $slide->link = $req->Link;
+
+        if($req->hasFile('Hinh')){
+            $file = $req->file('Hinh');
+            $duoi = $file->getClientOriginalExtension();
+            if($duoi != 'jpg' && $duoi != 'png'){
+                return redirect()->back()->with('thongbao','Hình ảnh phải có đuôi là jpg hoặc png!');
+            }
+            $name = $file->getClientOriginalName();
+            $Hinh = Str::random(4)."_".$name;
+            while(file_exists('upload/slide'.$Hinh)){
+                unlink('upload/slide/'.$slide->Hinh);
+                $Hinh = Str::random(4)."_".$name;
+            }
+            $file->move('upload/slide',$Hinh);
+
+            $slide->Hinh = $Hinh;
+        }
+        $slide->save();
+
+        return redirect()->back()->with('thongbao','Sửa Thành Công!');
+
+    }
+
+    public function getXoa($id){
+        $slide = Slide::find($id);
+        $slide->delete();
+        return redirect()->back()->with('thongbao','Đã xóa thành công!');
     }
 }

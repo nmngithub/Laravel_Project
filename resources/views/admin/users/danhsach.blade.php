@@ -10,11 +10,18 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+            @if (session('thongbao'))
+                <div class="alert alert-success">
+                    {{session('thongbao')}}
+                </div>
+            @endif
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Email</th>
+                        <th>Quyen</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
@@ -25,8 +32,16 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin.theloai.xoa"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin.theloai.sua">Edit</a></td>
+                            <td>{{$item->email}}</td>
+                            <td>
+                                @if ($item->quyen == 1)
+                                    {{"Admin"}}
+                                @else
+                                    {{"User"}}
+                                @endif
+                            </td>
+                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/users/xoa/{{$item->id}}"> Delete</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/users/sua/{{$item->id}}">Edit</a></td>
                         </tr>
                     @endforeach
                     

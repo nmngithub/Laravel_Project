@@ -92,10 +92,11 @@ class TinTucController extends Controller
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
             while(file_exists('upload/tintuc'.$Hinh)){
+                unlink('upload/tintuc/'.$tintuc->Hinh);
                 $Hinh = Str::random(4)."_".$name;
             }
             $file->move('upload/tintuc',$Hinh);
-            unlink('upload/tintuc/'.$tintuc->Hinh);
+            
             
             $tintuc->Hinh = $Hinh;
         }

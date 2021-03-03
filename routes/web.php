@@ -28,7 +28,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'admin'], function(){
+Route::get('admin/login',[UsersController::class, 'getLoginAdmin']);
+Route::post('admin/login',[UsersController::class, 'postLoginAdmin']);
+Route::get('admin/logout',[UsersController::class, 'getLogoutAdmin']);
+
+
+Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
     Route::group(['prefix'=>'theloai'], function(){
         Route::get('danhsach',[TheLoaiController::class, 'getDanhSach']);
@@ -82,12 +87,23 @@ Route::group(['prefix'=>'admin'], function(){
 
     Route::group(['prefix'=>'users'], function(){
         Route::get('danhsach',[UsersController::class, 'getDanhSach']);
+
         Route::get('them',[UsersController::class, 'getThem']);
-        Route::get('sua',[UsersController::class, 'getSua']);
+        Route::post('them',[UsersController::class, 'postThem']);
+
+        Route::get('sua/{id}',[UsersController::class, 'getSua']);
+        Route::post('sua/{id}',[UsersController::class, 'postSua']);
+
+        Route::get('xoa/{id}', [UsersController::class, 'getXoa']);
     });
     
 
     Route::group(['prefix'=>'ajax'], function(){
         Route::get('loaitin/{idTheLoai}',[AjaxController::class, 'getLoaiTin']);
     });
+
+});
+
+Route::get('trangchu',function(){
+    return view('pages.trangchu');
 });
