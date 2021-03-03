@@ -13,6 +13,8 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PagesController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -104,6 +106,5 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
 });
 
-Route::get('trangchu',function(){
-    return view('pages.trangchu');
-});
+Route::get('trangchu', [PagesController::class, 'trangchu']);
+Route::get('contact', [PagesController::class, 'contact']);
