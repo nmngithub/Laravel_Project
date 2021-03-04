@@ -24,9 +24,9 @@
                         @if (count($tl->loaitin)>0)
                         <div class="row-item row">
                             <h3>
-                                <a href="category.html">{{$tl->Ten}}</a> | 	
+                                <a href="#">{{$tl->Ten}}</a> | 	
                                 @foreach ($tl->loaitin as $lt)
-                                <small><a href="category.html"><i>{{$lt->Ten}}</i></a>/</small>  
+                                <small><a href="category/{{$lt->id}}/{{$lt->TenKhongDau}}.html"><i>{{$lt->Ten}}</i></a>/</small>  
                                 @endforeach
                             </h3>
                             <?php 
@@ -37,15 +37,15 @@
                                 @if (isset($tin1))
             
                                 <div class="col-md-5">
-                                    <a href="detail.html">
+                                    <a href="detail/{{$tin1->id}}/{{$tin1->TieuDeKhongDau}}.html">
                                         <img class="img-responsive" src="upload/tintuc/{{$tin1['Hinh']}}" alt="">
                                     </a>
                                 </div>
                                                         
-                                <div class="col-md-7">
-                                    <h3>{{$tin1['TieuDe']}}</h3>
+                                <div class="col-md-7"> 
+                                    <h3 style="margin-top: 0">{{$tin1['TieuDe']}}</h3>
                                     <p>{{$tin1['TomTat']}}</p>
-                                    <a class="btn btn-primary" href="detail.html">Xem Thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <a class="btn btn-primary" href="detail/{{$tin1['id']}}/{{$tin1->TieuDeKhongDau}}.html">Xem Thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
                                 @endif
                             </div>
@@ -55,10 +55,10 @@
                                @if (isset($data))
                                    @foreach ($data->all() as $dt)
                                        
-                                <a href="detail.html">
+                                <a href="detail/{{$dt->id}}/{{$dt->TieuDeKhongDau}}.html">
                                     <h4>
                                         <span class="glyphicon glyphicon-list-alt"></span>
-                                       {{$dt->TieuDe}}
+                                        {{$dt->TieuDe}}
                                     </h4>
                                 </a>
 

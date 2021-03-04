@@ -106,5 +106,13 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
 });
 
-Route::get('trangchu', [PagesController::class, 'trangchu']);
-Route::get('contact', [PagesController::class, 'contact']);
+Route::get('trangchu', [PagesController::class, 'trangchu'])->middleware('login');
+Route::get('contact', [PagesController::class, 'contact'])->middleware('login');
+Route::get('about', [PagesController::class, 'about'])->middleware('login');
+Route::get('register', [PagesController::class, 'register'])->middleware('login');
+Route::get('category/{id}/{TenKhongDau}.html', [PagesController::class, 'category'])->middleware('login');
+Route::get('detail/{id}/{TieuDeKhongDau}.html', [PagesController::class, 'detail'])->middleware('login');
+Route::get('login',[PagesController::class, 'getLogin']);
+Route::post('login',[PagesController::class, 'postLogin']);
+Route::get('logout',[PagesController::class, 'logout']);
+Route::post('comment/{id}',[PagesController::class, 'comment']);

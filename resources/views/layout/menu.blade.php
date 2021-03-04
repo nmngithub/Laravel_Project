@@ -12,7 +12,7 @@
                 @foreach ($tl->loaitin as $lt)
                
                 <li class="list-group-item">
-                    <a href="#">{{$lt->Ten}}</a>
+                    <a href="category/{{$lt->id}}/{{$lt->TenKhongDau}}.html">{{$lt->Ten}}</a>
                 </li>
                      
                 @endforeach
