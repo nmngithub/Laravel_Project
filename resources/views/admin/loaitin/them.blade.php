@@ -31,7 +31,7 @@
                         <label>Thể Loại</label>
                         <select class="form-control" name="TheLoai">
                            @foreach ($tl as $item)
-                            <option value="{{$item->id}}">{{$item->Ten}}</option>
+                            <option value="{{$item->Ten}}">{{$item->Ten}}</option>
                            @endforeach
                         </select>
                     </div>

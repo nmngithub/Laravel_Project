@@ -19,7 +19,6 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
                         <th>Name</th>
                         <th>Delete</th>
                         <th>Edit</th>
@@ -29,7 +28,6 @@
 
                     @foreach ($theloai as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->id}}</td>
                             <td>{{$item->Ten}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/theloai/xoa/{{$item->id}}">Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/theloai/sua/{{$item->id}}">Edit</a></td>

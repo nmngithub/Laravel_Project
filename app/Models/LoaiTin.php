@@ -3,18 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Jenssegers\Mongodb\Eloquent\Model;
 
 class LoaiTin extends Model
 {
     use HasFactory;
-    protected $table = "LoaiTin";
+    protected $table = "loaitin";
 
-    public function theloai(){
-        return $this->belongsTo('App\Models\TheLoai','idTheLoai','id');
-    }
+    // public function theloai(){
+    //     return $this->belongsTo('App\Models\TheLoai','idTheLoai','id');
+    // }
 
-    public function tintuc(){
-        return $this->hasMany('App\Models\TinTuc','idLoaiTin','id');
-    }
+    // public function tintuc(){
+    //     return $this->hasMany('App\Models\TinTuc','idLoaiTin','id');
+    // }
 }

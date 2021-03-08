@@ -19,7 +19,6 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
                         <th>Tiêu Đề</th>
                         <th>Tóm Tắt</th>
                         <th>Thể Loại</th>
@@ -33,7 +32,6 @@
 
                     @foreach ($tintuc as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->id}}</td>
                             <td>
                                 <p>{{$item->TieuDe}}</p>
                                 <img src="upload/tintuc/{{$item->Hinh}}" width="100px" alt="">

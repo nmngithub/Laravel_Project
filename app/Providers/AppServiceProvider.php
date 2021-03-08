@@ -9,6 +9,7 @@ use App\Models\LoaiTin;
 use App\Models\TinTuc;
 use App\Models\Slide;
 use App\Models\Users;
+use Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,11 +34,14 @@ class AppServiceProvider extends ServiceProvider
         $slide = Slide::all();
         $loaitin = LoaiTin::all();
         $tintuc = TinTuc::all();
-        $user = Users::all();
+        $user = Auth::user();
         View::share('theloai', $theloai);
         View::share('slide', $slide);
         View::share('loaitin', $loaitin);
         View::share('tintuc', $tintuc);
-        View::share('user', $user);
+        if(Auth::check()){
+            View::share('user',$user);
+        }
+        
     }
 }

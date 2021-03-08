@@ -18,7 +18,6 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
                         <th>Tên</th>
                         <th>Hình</th>
                         <th>Nội Dung</th>
@@ -31,7 +30,6 @@
 
                     @foreach ($slide as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->id}}</td>
                             <td>{{$item->Ten}}</td>
                             <td>
                                 <img width="600px" src="upload/slide/{{$item->Hinh}}" alt="">

@@ -32,7 +32,7 @@
                         <select class="form-control" name="TheLoai">
                             @foreach ($tl as $item)
                                 <option
-                                @if ($loaitin->idTheLoai == $item->id)
+                                @if ($loaitin->TheLoai == $item->Ten)
                                     {{"Selected"}}
                                 @endif
                                  value="{{$item->id}}">{{$item->Ten}}</option>

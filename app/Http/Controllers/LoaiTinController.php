@@ -11,6 +11,7 @@ class LoaiTinController extends Controller
 {
     public function getDanhSach(){
         $loaitin = LoaiTin::all();
+
         return view('admin.loaitin.danhsach',['loaitin'=>$loaitin]);
     }
 
@@ -36,7 +37,7 @@ class LoaiTinController extends Controller
         $loaitin = new LoaiTin;
         $loaitin->Ten = $req->Ten;
         $loaitin->TenKhongDau = changeTitle($req->Ten);
-        $loaitin->idTheLoai = $req->TheLoai;
+        $loaitin->TheLoai = $req->TheLoai;
         $loaitin->save();
 
         return redirect()->back()->with('thongbao','Thêm thành công!');
@@ -67,7 +68,7 @@ class LoaiTinController extends Controller
 
         $loaitin->Ten = $req->Ten;
         $loaitin->TenKhongDau = changeTitle($req->TenKhongDau);
-        $loaitin->idTheLoai = $req->TheLoai;
+        $loaitin->TheLoai = $req->TheLoai;
         $loaitin->save();
 
         return redirect()->back()->with('thongbao','Sửa Thành Công');   
@@ -76,7 +77,7 @@ class LoaiTinController extends Controller
     public function getXoa($id) {
 
     	$loaitin = loaitin::find($id);
-        $tintuc = tintuc::where('idloaitin',$id);
+        $tintuc = tintuc::where('loaitin',$id);
         $tintuc->delete();
     	$loaitin->delete();
     	return redirect()->back()->with('thongbao','Xóa thành công');

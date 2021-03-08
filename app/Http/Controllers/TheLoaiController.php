@@ -8,8 +8,7 @@ use App\Models\TheLoai;
 class TheLoaiController extends Controller
 {
     public function getDanhSach(){
-        $theloai = TheLoai::all();
-        return view('admin.theloai.danhsach',['theloai'=>$theloai]);
+        return view('admin.theloai.danhsach');
     }
 
     public function getThem(){
