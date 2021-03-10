@@ -43,8 +43,8 @@ Route::group(['prefix'=>'admin'], function(){
         Route::get('them',[TheLoaiController::class, 'getThem']);
         Route::post('them',[TheLoaiController::class, 'postThem']);
 
-        Route::get('sua/{id}',[TheLoaiController::class, 'getSua']);
-        Route::post('sua/{id}',[TheLoaiController::class, 'postSua']);
+        Route::get('sua/{_id}',[TheLoaiController::class, 'getSua']);
+        Route::post('sua/{_id}',[TheLoaiController::class, 'postSua']);
 
         Route::get('xoa/{id}', [TheLoaiController::class, 'getXoa']);
     });

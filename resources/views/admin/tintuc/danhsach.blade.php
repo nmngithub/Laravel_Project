@@ -19,6 +19,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
+                        <th>ID</th>
                         <th>Tiêu Đề</th>
                         <th>Tóm Tắt</th>
                         <th>Thể Loại</th>
@@ -29,16 +30,17 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach ($tintuc as $item)
                         <tr class="odd gradeX" align="center">
+                            <td>{{$item->TinTuc_id}}</td>
                             <td>
                                 <p>{{$item->TieuDe}}</p>
                                 <img src="upload/tintuc/{{$item->Hinh}}" width="100px" alt="">
                             </td>
                             <td>{{$item->TomTat}}</td>
-                            <td>{{$item->loaitin->theloai->Ten}}</td>
-                            <td>{{$item->loaitin->Ten}}</td>
+                            <td>{{$item->TheLoai_id}}</td>
+                            <td>{{$lt[$item->LoaiTin_id]['Ten']}}</td>
+                            <td>{{$lt[$item->LoaiTin_id]['Theloai_Ten']}}</td>
                             <td>
                                 @if ($item->NoiBat == 0)
                                     {{'Không'}}

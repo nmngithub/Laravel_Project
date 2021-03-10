@@ -13,7 +13,25 @@ class TinTucController extends Controller
 {
     public function getDanhSach(){
         $tintuc = TinTuc::all();
-        return view('admin.tintuc.danhsach',['tintuc'=>$tintuc]);
+        $loai = LoaiTin::all();
+        $loaitin = LoaiTin::select('LoaiTin_id','TheLoai_id','Ten')->get()->toArray();
+        $theloai = TheLoai::select('TheLoai_id','Ten')->get()->toArray();;
+        $lt=[];
+        $tl=[]; 
+
+        foreach($theloai as $key2 => $value2)
+        {
+            $tl[$value2['TheLoai_id']] = $value2['Ten'];  
+        }
+        
+        foreach($loaitin as $key1 => $value1)
+        {
+            $lt[$value1['LoaiTin_id']] = $value1; 
+            $lt[$value1['LoaiTin_id']]['Theloai_ten'] = $tl[$value1['TheLoai_id']]; 
+        }
+           
+
+        return view('admin.tintuc.danhsach',['lt'=>$lt, 'tl'=>$tl]);
     }
 
     public function getThem(){

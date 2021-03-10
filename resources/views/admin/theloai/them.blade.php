@@ -37,6 +37,8 @@
                     <div class="form-group">
                         <label>Tên thể loại</label>
                         <input class="form-control" name="Ten" placeholder="Nhập tên thể loại" />
+                        <label>TheLoai_id</label>
+                        <input class="form-control" name="TheLoai_id" placeholder="Nhập TheLoai_id" />
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>
                     <button type="reset" class="btn btn-default">Reset</button>

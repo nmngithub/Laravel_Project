@@ -31,9 +31,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $theloai = TheLoai::all();
-        $slide = Slide::all();
-        $loaitin = LoaiTin::all();
-        $tintuc = TinTuc::all();
+        $slide = Slide::all()->sortBy('id');
+        $loaitin = LoaiTin::all()->sortBy('id');
+        $tintuc = TinTuc::all()->sortBy('id');
         $user = Auth::user();
         View::share('theloai', $theloai);
         View::share('slide', $slide);

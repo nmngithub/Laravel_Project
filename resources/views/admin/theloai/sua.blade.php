@@ -7,6 +7,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Thể Loại
                     <small>{{$theloai->Ten}}</small>
+                 
                 </h1>
             </div>
             <!-- /.col-lg-12 -->

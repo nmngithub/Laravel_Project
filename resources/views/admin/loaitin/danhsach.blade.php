@@ -18,6 +18,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Thể Loại</th>
                         <th>Delete</th>
@@ -28,8 +29,9 @@
 
                     @foreach ($loaitin as $item)
                         <tr class="odd gradeX" align="center">
+                            <td>{{$item->LoaiTin_id}}</td>
                             <td>{{$item->Ten}}</td>
-                            <td>{{$item->TheLoai}}</td>
+                            <td>{{$tl[$item->TheLoai_id]}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/loaitin/xoa/{{$item->id}}">Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/loaitin/sua/{{$item->id}}">Edit</a></td>
                         </tr>
