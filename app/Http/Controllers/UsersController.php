@@ -23,7 +23,7 @@ class UsersController extends Controller
             'Ten'=>'required|min:3|max:100',
             'Email'=>'required|email|min:3|max:30',
             'password'=>'required|min:3|max:12',
-            'passwordAgain'=>'required|same:password|min:3|max:12'
+            'passwordAgain'=>'required|same:password|min:3|max:12',
         ],
         [
             'Ten.required'=>'Bạn chưa nhập Tên người dùng!',
@@ -44,14 +44,16 @@ class UsersController extends Controller
             'passwordAgain.email'=>'Bạn chưa nhập đúng định dạng Password!',
             'passwordAgain.min'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
             'passwordAgain.max'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
-            'passwordAgain.same'=>'Mật khẩu nhập lại chưa khớp!'
+            'passwordAgain.same'=>'Mật khẩu nhập lại chưa khớp!',
         ]);
 
         $users = new Users;
+        $users->User_id =(int) $req->User_id;
         $users->name = $req->Ten;
         $users->email = $req->Email;
         $users->password = bcrypt($req->password); 
         $users->quyen = $req->quyen;
+        $users->block = $req->block;
 
         $users->save();
 
@@ -99,6 +101,7 @@ class UsersController extends Controller
         $users->email = $req->Email;
         $users->password = bcrypt($req->password); 
         $users->quyen = $req->quyen;
+        $users->block = $req->block;
 
         $users->save();
 
@@ -108,8 +111,6 @@ class UsersController extends Controller
 
     public function getXoa($id){
         $users = Users::find($id);
-        $comment = Comment::where('idUser',$id);
-        $comment->delete();
         $users->delete();
         return redirect()->back()->with('thongbao', 'Đã xóa User thành công!');
     }

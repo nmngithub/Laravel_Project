@@ -22,15 +22,16 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Quyen</th>
+                        <th>Block Or Not</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php $stt=1 ?>
                     @foreach ($users as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->id}}</td>
+                            <td>{{$stt}}</td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->email}}</td>
                             <td>
@@ -40,9 +41,17 @@
                                     {{"User"}}
                                 @endif
                             </td>
+                            <td>
+                                @if ($item->block == 1)
+                                    {{"Block"}}
+                                @else
+                                    {{"Not Block"}}
+                                @endif
+                            </td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/users/xoa/{{$item->id}}"> Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/users/sua/{{$item->id}}">Edit</a></td>
                         </tr>
+                        <?php $stt++ ?>
                     @endforeach
                     
     

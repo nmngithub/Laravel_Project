@@ -3,21 +3,18 @@
         <li href="#" class="list-group-item menu1 active">
             Menu
         </li>
-        @foreach ($theloai as $tl)
-            @if(count($tl->loaitin)>0)
+        @foreach ($theloai as $item)
             <li href="#" class="list-group-item menu1">
-                {{$tl->Ten}}
+                {{$item->Ten}}
             </li>
+            
             <ul>
-                @foreach ($tl->loaitin as $lt)
-               
+                @foreach ($loaitin as $item)
                 <li class="list-group-item">
-                    <a href="category/{{$lt->id}}/{{$lt->TenKhongDau}}.html">{{$lt->Ten}}</a>
-                </li>
-                     
-                @endforeach
+                    <a href="">{{$item->Ten}}</a>
+                </li>  
+                @endforeach   
             </ul>
-            @endif
         @endforeach
     </ul>
 </div>

@@ -13,7 +13,30 @@ use Auth;
 class PagesController extends Controller
 {
     public function trangchu(){
-        return view('pages.trangchu');
+        $theloai = TheLoai::select('id','Ten')->get()->toArray();
+        $loaitin = LoaiTin::select('id','Ten','TheLoai')->get()->toArray();
+        $tl = [];
+        $lt = [];
+
+        foreach($loaitin as $key1 => $value1)
+        {
+            $lt[$value1['_id']] = $value1['TheLoai'];
+        }
+        dump($lt);
+
+        foreach($theloai as $key2 => $value2)
+        {
+            $tl[$value2['_id']]=$value2['Ten'];
+            if($lt[$value1['_id']] == $tl[$value2['_id']])
+            {
+                $tl[$value2['_id']]= $lt[$value1['Ten']];
+            }
+        }
+
+        dd($tl);
+
+
+        return view('pages.trangchu',['tl'=>$tl]);
     }
 
     public function contact(){

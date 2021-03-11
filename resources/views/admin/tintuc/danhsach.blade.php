@@ -30,17 +30,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $stt = 1; ?>
                     @foreach ($tintuc as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->TinTuc_id}}</td>
+                            <td>{{$stt}}</td>
                             <td>
                                 <p>{{$item->TieuDe}}</p>
                                 <img src="upload/tintuc/{{$item->Hinh}}" width="100px" alt="">
                             </td>
                             <td>{{$item->TomTat}}</td>
-                            <td>{{$item->TheLoai_id}}</td>
-                            <td>{{$lt[$item->LoaiTin_id]['Ten']}}</td>
-                            <td>{{$lt[$item->LoaiTin_id]['Theloai_Ten']}}</td>
+                            <td>{{$item->TheLoai}}</td>
+                            <td>{{$item->LoaiTin}}</td>
                             <td>
                                 @if ($item->NoiBat == 0)
                                     {{'Không'}}
@@ -50,8 +50,9 @@
                             </td>
 
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/tintuc/xoa/{{$item->id}}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/sua/{{$item->id}}}">Edit</a></td>
+                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/sua/{{$item->id}}">Edit</a></td>
                         </tr>
+                        <?php $stt++; ?>
                     @endforeach
                     
     

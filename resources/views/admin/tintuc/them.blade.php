@@ -31,16 +31,18 @@
                     <div class="form-group">
                         <label>Thể Loại</label>
                         <select class="form-control" name="TheLoai" id="TheLoai">
-                            @foreach ($theloai as $tl)
-                                <option value="{{$tl->id}}">{{$tl->Ten}}</option>
+                            
+                            @foreach ($theloai as $item)
+                                <option value="{{$item->Ten}}">{{$item->Ten}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Loại Tin</label>
                         <select class="form-control" name="LoaiTin" id="LoaiTin">
-                            @foreach ($loaitin as $lt)
-                                <option value="{{$lt->id}}">{{$lt->Ten}}</option>
+
+                            @foreach ($loaitin as $item)
+                                <option value="{{$item->Ten}}">{{$item->Ten}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -78,21 +80,4 @@
     </div>
     <!-- /.container-fluid -->
 </div>
-@endsection
-
-@section('script')
-    <script>
-        $(document).ready(function(){
-            var idTheLoai = $('#TheLoai').val();
-                $.get("admin/ajax/loaitin/"+idTheLoai, function(data){
-                    $("#LoaiTin").html(data);
-                });
-            $("#TheLoai").change(function(){
-                var idTheLoai = $(this).val();
-                $.get("admin/ajax/loaitin/"+idTheLoai, function(data){
-                    $("#LoaiTin").html(data);
-                });
-            });
-        });
-    </script>
 @endsection

@@ -7,7 +7,7 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-    public function getXoa($id, $idTinTuc){
+    public function getXoa($id, $TinTuc_id){
         $comment = Comment::find($id);
         $comment->delete();
 

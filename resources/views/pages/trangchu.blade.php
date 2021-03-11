@@ -20,57 +20,57 @@
 
                 <div class="panel-body">
                     <!-- item -->
-                    @foreach ($theloai as $tl)
-                        @if (count($tl->loaitin)>0)
+                    {{-- @foreach ($theloai as $tl)
+                        @if (count($tl->loaitin)>0) --}}
                         <div class="row-item row">
                             <h3>
-                                <a href="#">{{$tl->Ten}}</a> | 	
-                                @foreach ($tl->loaitin as $lt)
-                                <small><a href="category/{{$lt->id}}/{{$lt->TenKhongDau}}.html"><i>{{$lt->Ten}}</i></a>/</small>  
-                                @endforeach
+                                {{-- <a href="#">{{$tl->Ten}}</a> | 	 --}}
+                                {{-- @foreach ($tl->loaitin as $lt) --}}
+                                <small><a href=""><i></i></a>/</small>  
+                                {{-- @endforeach --}}
                             </h3>
-                            <?php 
+                            {{-- <?php 
                                 $data = $tl->tintuc->where('NoiBat',1)->sortByDesc('created_at')->take(5);
                                 $tin1 = $data->shift();
-                            ?>
+                            ?> --}}
                             <div class="col-md-8 border-right">
-                                @if (isset($tin1))
+                                {{-- @if (isset($tin1)) --}}
             
                                 <div class="col-md-5">
-                                    <a href="detail/{{$tin1->id}}/{{$tin1->TieuDeKhongDau}}.html">
-                                        <img class="img-responsive" src="upload/tintuc/{{$tin1['Hinh']}}" alt="">
+                                    <a href="">
+                                        <img class="img-responsive" src="" alt="">
                                     </a>
                                 </div>
                                                         
                                 <div class="col-md-7"> 
-                                    <h3 style="margin-top: 0">{{$tin1['TieuDe']}}</h3>
-                                    <p>{{$tin1['TomTat']}}</p>
-                                    <a class="btn btn-primary" href="detail/{{$tin1['id']}}/{{$tin1->TieuDeKhongDau}}.html">Xem Thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                    <h3 style="margin-top: 0"></h3>
+                                    <p></p>
+                                    <a class="btn btn-primary" href="">Xem Thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
                                 </div>
-                                @endif
+                                {{-- @endif --}}
                             </div>
                             
 
                             <div class="col-md-4">
-                               @if (isset($data))
-                                   @foreach ($data->all() as $dt)
+                               {{-- @if (isset($data))
+                                   @foreach ($data->all() as $dt) --}}
                                        
-                                <a href="detail/{{$dt->id}}/{{$dt->TieuDeKhongDau}}.html">
+                                <a href="">
                                     <h4>
                                         <span class="glyphicon glyphicon-list-alt"></span>
-                                        {{$dt->TieuDe}}
+                                        {{-- {{$dt->TieuDe}} --}}
                                     </h4>
                                 </a>
 
-                                    @endforeach
+                                    {{-- @endforeach
 
-                                @endif
+                                @endif --}}
                             </div>
                             
                             <div class="break"></div>
                         </div>
-                        @endif
-                    @endforeach
+                        {{-- @endif
+                    @endforeach --}}
                     <!-- end item -->
 
                 </div>

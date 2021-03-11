@@ -29,20 +29,15 @@
                     @csrf
                     <div class="form-group">
                         <label>Thể Loại</label>
-                        <select class="form-control" name="TheLoai_id">
-                         
-                           @foreach ($tl as $item)
-                            <option value="{{$item->TheLoai_id}}">{{$item->Ten}}</option>
+                        <select class="form-control" name="TheLoai">
+                           @foreach ($theloai as $item)
+                            <option value="{{$item->Ten}}">{{$item->Ten}}</option>
                            @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Tên Loại Tin</label>
                         <input class="form-control" name="Ten" placeholder="Nhập tên loại tin" />
-                    </div>
-                    <div class="form-group">
-                        <label>LoaiTin_id</label>
-                        <input class="form-control" name="LoaiTin_id" placeholder="Nhập tên loại tin" />
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>
                     <button type="reset" class="btn btn-default">Reset</button>

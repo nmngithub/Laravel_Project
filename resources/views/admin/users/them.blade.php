@@ -52,6 +52,15 @@
                             <input name="quyen" value="1" type="radio">Admin
                         </label>
                     </div>
+                    <div class="form-group">
+                        <label>Block Or Not</label>
+                        <label class="radio-inline">
+                            <input name="block" value="0" checked="" type="radio">Not Block
+                        </label>
+                        <label class="radio-inline">
+                            <input name="block" value="1" type="radio">Block
+                        </label>
+                    </div>
                     <button type="submit" class="btn btn-default">Save</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 <form>

@@ -18,6 +18,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
+                        <th>ID</th>
                         <th>Tên</th>
                         <th>Hình</th>
                         <th>Nội Dung</th>
@@ -27,9 +28,11 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php $stt=1 ?>
                     @foreach ($slide as $item)
+                    
                         <tr class="odd gradeX" align="center">
+                            <td>{{$stt}}</td>
                             <td>{{$item->Ten}}</td>
                             <td>
                                 <img width="600px" src="upload/slide/{{$item->Hinh}}" alt="">
@@ -39,6 +42,7 @@
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/slide/xoa/{{$item->id}}"> Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/slide/sua/{{$item->id}}">Edit</a></td>
                         </tr>
+                        <?php $stt++ ?>
                     @endforeach
                     
     

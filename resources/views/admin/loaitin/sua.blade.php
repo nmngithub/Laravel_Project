@@ -35,7 +35,7 @@
                                 @if ($loaitin->TheLoai == $item->Ten)
                                     {{"Selected"}}
                                 @endif
-                                 value="{{$item->id}}">{{$item->Ten}}</option>
+                                 value="{{$item->TheLoai_id}}">{{$item->Ten}}</option>
                             @endforeach
                         </select>
                     </div>

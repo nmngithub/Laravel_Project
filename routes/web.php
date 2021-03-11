@@ -100,10 +100,6 @@ Route::group(['prefix'=>'admin'], function(){
     });
     
 
-    Route::group(['prefix'=>'ajax'], function(){
-        Route::get('loaitin/{idTheLoai}',[AjaxController::class, 'getLoaiTin']);
-    });
-
 });
 
 Route::get('trangchu', [PagesController::class, 'trangchu']);

@@ -26,12 +26,13 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    <?php $stt=1; ?>
                     @foreach ($loaitin as $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{$item->LoaiTin_id}}</td>
+                            <td>{{$stt}}</td>
+                    <?php $stt++; ?>
                             <td>{{$item->Ten}}</td>
-                            <td>{{$tl[$item->TheLoai_id]}}</td>
+                            <td>{{$item->TheLoai}}</td>
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/loaitin/xoa/{{$item->id}}">Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/loaitin/sua/{{$item->id}}">Edit</a></td>
                         </tr>
