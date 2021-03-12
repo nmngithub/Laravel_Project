@@ -13,30 +13,7 @@ use Auth;
 class PagesController extends Controller
 {
     public function trangchu(){
-        $theloai = TheLoai::select('id','Ten')->get()->toArray();
-        $loaitin = LoaiTin::select('id','Ten','TheLoai')->get()->toArray();
-        $tl = [];
-        $lt = [];
-
-        foreach($loaitin as $key1 => $value1)
-        {
-            $lt[$value1['_id']] = $value1['TheLoai'];
-        }
-        dump($lt);
-
-        foreach($theloai as $key2 => $value2)
-        {
-            $tl[$value2['_id']]=$value2['Ten'];
-            if($lt[$value1['_id']] == $tl[$value2['_id']])
-            {
-                $tl[$value2['_id']]= $lt[$value1['Ten']];
-            }
-        }
-
-        dd($tl);
-
-
-        return view('pages.trangchu',['tl'=>$tl]);
+        return view('pages.trangchu');
     }
 
     public function contact(){
@@ -47,18 +24,18 @@ class PagesController extends Controller
         return view('pages.register');
     }
 
-    public function category($id){
-        $loaitin = LoaiTin::find($id);
-        $tintuc = TinTuc::where('idLoaiTin',$id)->simplePaginate(5);
-        return view('pages.category', ['loaitin'=>$loaitin, 'tintuc'=>$tintuc]);
+    public function category($Ten){
+        $loaitin = LoaiTin::where('Ten',$Ten)->get();
+        $tintuc = TinTuc::where('LoaiTin',$Ten)->paginate(3);
+        return view('pages.category',['loaitin'=>$loaitin,'tintuc'=>$tintuc]);
     }
 
-    public function detail($id){
+    public function detail($_id){
        
-        $tintuc = TinTuc::find($id);
-        $tinnoibat = TinTuc::where('NoiBat', 1)->take(2)->get(); 
-        $tinlienquan = TinTuc::where('idLoaiTin', $tintuc->idLoaiTin)->where('id','<>',$id)->take(2)->get();
-        return view('pages.detail', ['tintuc'=>$tintuc, 'tinnoibat'=>$tinnoibat,'tinlienquan'=>$tinlienquan]);
+        $tintuc = TinTuc::find($_id);
+        $tinnoibat = TinTuc::where('NoiBat', 1)->take(3)->get(); 
+        $tinlienquan = TinTuc::where('LoaiTin',$tintuc->LoaiTin)->where('_id','<>',$_id)->take(3)->get();
+        return view('pages.detail', ['tintuc'=>$tintuc, 'tinnoibat'=>$tinnoibat, 'tinlienquan'=>$tinlienquan]);
     }
 
     public function about(){

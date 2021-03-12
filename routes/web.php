@@ -103,11 +103,11 @@ Route::group(['prefix'=>'admin'], function(){
 });
 
 Route::get('trangchu', [PagesController::class, 'trangchu']);
-Route::get('contact', [PagesController::class, 'contact'])->middleware('login');
-Route::get('about', [PagesController::class, 'about'])->middleware('login');
+Route::get('contact', [PagesController::class, 'contact']);
+Route::get('about', [PagesController::class, 'about']);
 Route::get('register', [PagesController::class, 'register']);   
-Route::get('category/{id}/{TenKhongDau}.html', [PagesController::class, 'category']);
-Route::get('detail/{id}/{TieuDeKhongDau}.html', [PagesController::class, 'detail']);
+Route::get('category/{Ten}', [PagesController::class, 'category']);
+Route::get('detail/{_id}', [PagesController::class, 'detail']);
 Route::get('login',[PagesController::class, 'getLogin']);
 Route::post('login',[PagesController::class, 'postLogin']);
 Route::get('logout',[PagesController::class, 'logout']);

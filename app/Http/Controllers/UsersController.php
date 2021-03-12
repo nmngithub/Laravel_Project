@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Users;
 use App\Models\Comment;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
 
 class UsersController extends Controller
 {
@@ -111,6 +112,7 @@ class UsersController extends Controller
 
     public function getXoa($id){
         $users = Users::find($id);
+        dd($users);
         $users->delete();
         return redirect()->back()->with('thongbao', 'Đã xóa User thành công!');
     }

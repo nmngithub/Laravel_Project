@@ -9,7 +9,6 @@ class TheLoai extends Model
 {
     use HasFactory;
     protected $table = "theloai";
-    protected $collection = "theloai";
 
     // public function loaitin(){
     //     return $this->hasMany('App\Models\LoaiTin', 'idTheLoai', 'id');

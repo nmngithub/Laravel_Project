@@ -3,13 +3,15 @@
 @section('content')
 <div class="container">
 
+    <!-- slider -->
     @include('layout.slide')
+    <!-- end slide -->
 
     <div class="space20"></div>
 
 
     <div class="row main-left">
-        
+       
         @include('layout.menu')
 
         <div class="col-md-9">
@@ -20,59 +22,54 @@
 
                 <div class="panel-body">
                     <!-- item -->
-                    {{-- @foreach ($theloai as $tl)
-                        @if (count($tl->loaitin)>0) --}}
-                        <div class="row-item row">
-                            <h3>
-                                {{-- <a href="#">{{$tl->Ten}}</a> | 	 --}}
-                                {{-- @foreach ($tl->loaitin as $lt) --}}
-                                <small><a href=""><i></i></a>/</small>  
-                                {{-- @endforeach --}}
-                            </h3>
-                            {{-- <?php 
-                                $data = $tl->tintuc->where('NoiBat',1)->sortByDesc('created_at')->take(5);
+                @foreach ($theloai as $item1)
+                    <div class="row-item row">
+                        <h3>
+                            <a href="#">{{$item1->Ten}}</a> | 
+                            @foreach ($lt[$item1->Ten] as $item2)
+                            <small><a href="category/{{$item2}}"><i>{{$item2}}</i></a>/</small>
+                            @endforeach	
+                        </h3>
+
+                        <?php 
+                                $data = $tintuc->where('TheLoai',$item1->Ten)->sortByDesc('_id')->take(4);
                                 $tin1 = $data->shift();
-                            ?> --}}
-                            <div class="col-md-8 border-right">
-                                {{-- @if (isset($tin1)) --}}
-            
-                                <div class="col-md-5">
-                                    <a href="">
-                                        <img class="img-responsive" src="" alt="">
-                                    </a>
-                                </div>
-                                                        
-                                <div class="col-md-7"> 
-                                    <h3 style="margin-top: 0"></h3>
-                                    <p></p>
-                                    <a class="btn btn-primary" href="">Xem Thêm <span class="glyphicon glyphicon-chevron-right"></span></a>
-                                </div>
-                                {{-- @endif --}}
-                            </div>
-                            
+                        ?>
 
-                            <div class="col-md-4">
-                               {{-- @if (isset($data))
-                                   @foreach ($data->all() as $dt) --}}
-                                       
-                                <a href="">
-                                    <h4>
-                                        <span class="glyphicon glyphicon-list-alt"></span>
-                                        {{-- {{$dt->TieuDe}} --}}
-                                    </h4>
+               
+                        <div class="col-md-8 border-right">
+                            @if(isset($tin1))
+                            <div class="col-md-5">
+                                <a href="detail/{{$tin1->id}}/{{$tin1->TieuDeKhongDau}}.html">
+                                    <img class="img-responsive" src="upload/tintuc/{{$tin1['Hinh']}}" alt="">
                                 </a>
-
-                                    {{-- @endforeach
-
-                                @endif --}}
                             </div>
-                            
-                            <div class="break"></div>
-                        </div>
-                        {{-- @endif
-                    @endforeach --}}
-                    <!-- end item -->
 
+                            <div class="col-md-7">
+                                <h3>{{$tin1['TieuDe']}}</h3>
+                                <p>{{$tin1['TomTat']}}</p>
+                                <a class="btn btn-primary" href="detail/{{$tin1['_id']}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
+                            </div>
+                            @endif
+                        </div>
+                        
+                        {{-- @dump($data) --}}
+
+                        <div class="col-md-4">
+                            @foreach ($data as $item)
+                            <a href="detail/{{$item->_id}}">
+                                <h4>
+                                    <span class="glyphicon glyphicon-list-alt"></span>
+                                    {{$item->TieuDe}}
+                                </h4>
+                            </a>
+                            @endforeach
+                        </div>
+                        
+                        <div class="break"></div>
+                    </div>
+                @endforeach
+                    <!-- end item -->
                 </div>
             </div>
         </div>

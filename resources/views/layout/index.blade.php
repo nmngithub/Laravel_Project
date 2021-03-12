@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Laravel Khoa Pham</title>
+    <title>Laravel DEMO</title>
 
         <base href="{{asset('')}}">
     <!-- Bootstrap Core CSS -->

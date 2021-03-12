@@ -7,8 +7,9 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class TinTuc extends Model
 {
+    public $timestamps = false;
     use HasFactory;
-    protected $table = "tintuc";
+    protected $collection = "tintuc";
 
     // public function loaitin(){
     //     return $this->belongsTo('App\Models\LoaiTin','idLoaiTin','id');
