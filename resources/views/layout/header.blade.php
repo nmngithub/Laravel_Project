@@ -21,9 +21,10 @@
                 </li>
             </ul>
 
-            <form class="navbar-form navbar-left" role="search">
+            <form action="search" method="get" class="navbar-form navbar-left" role="search">
+                @csrf
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
+                  <input type="text" name="keywords" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
@@ -41,7 +42,7 @@
                                     
                 @else
                     <li>
-                        <a>
+                        <a href="account">
                             <span class ="glyphicon glyphicon-user"></span>
                             {{Auth::user()->name}}
                         </a>

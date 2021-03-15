@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Laravel Khoa Pham</title>
+    <title>Laravel DEMO</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -43,7 +43,21 @@
                 <div class="panel panel-default">
 				  	<div class="panel-heading">Đăng ký tài khoản</div>
 				  	<div class="panel-body">
-				    	<form>
+                          @if (count($errors)>0)
+                            @foreach ($errors->all() as $item)
+                                <div class="alert alert-danger">
+                                    {{$item}}
+                                </div>
+                            @endforeach
+                          @endif
+
+                        @if (session('thongbao'))
+                            <div class="alert alert-success">
+                                {{session('thongbao')}}
+                            </div>
+                        @endif
+				    	<form action="register" method="POST">
+                            @csrf
 				    		<div>
 				    			<label>Họ tên</label>
 							  	<input type="text" class="form-control" placeholder="Username" name="name" aria-describedby="basic-addon1">
@@ -56,7 +70,6 @@
 							</div>
 							<br>	
 							<div>
-								<input type="checkbox" class="" name="checkpassword">
 				    			<label>Nhập mật khẩu</label>
 							  	<input type="password" class="form-control" name="password" aria-describedby="basic-addon1">
 							</div>
@@ -66,7 +79,7 @@
 							  	<input type="password" class="form-control" name="passwordAgain" aria-describedby="basic-addon1">
 							</div>
 							<br>
-							<button type="button" class="btn btn-default">Đăng ký
+							<button type="submit" class="btn btn-default">Đăng ký
 							</button>
 
 				    	</form>

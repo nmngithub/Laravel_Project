@@ -21,14 +21,11 @@
             <img class="img-responsive" src="upload/tintuc/{{$tintuc->Hinh}}" alt="">
 
             <!-- Date/Time -->
-        
-            @if (isset($tintuc->created_at) || $tintuc->created_at != "NULL")
                 <p>
                     <span class="glyphicon glyphicon-time"></span> 
                     Posted on {{$tintuc->created_at}}
                 </p>
                 <hr>
-            @endif
             <!-- Post Content -->
             <p class="lead">{{$tintuc->TomTat}}</p>
             <p>{!!$tintuc->NoiDung!!}</p>
@@ -36,13 +33,18 @@
             <hr>
 
             <!-- Blog Comments -->
-
-            <!-- Comments Form -->
-            <div class="well">
+            @if (session('thongbao'))
+            <div class="alert alert-success">
+                {{session('thongbao')}}
+            </div>
+            @endif
+             <!-- Comments Form -->
+             <div class="well">
                 <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
-                <form role="form">
+                <form role="form" action="comment/{{$tintuc->_id}}" method="POST">
+                    @csrf
                     <div class="form-group">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" name="NoiDung" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Gửi</button>
                 </form>
@@ -53,18 +55,19 @@
             <!-- Posted Comments -->
 
             <!-- Comment -->
+            @foreach ($showinfo as $item)
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object" src="http://placehold.it/64x64" alt="">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">Start Bootstrap
-                        <small>August 25, 2014 at 9:30 PM</small>
+                    <h4 class="media-heading">{{$item['User_Name']}}
+                        <small>{{$item['created_at']}}</small>
                     </h4>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    {{$item['NoiDung']}}
                 </div>
             </div>
-
+            @endforeach
         </div>
 
         <!-- Blog Sidebar Widgets Column -->

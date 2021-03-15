@@ -66,6 +66,19 @@
             </li>
 
             <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Comments<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="admin/comment/danhsach">List Comments</a>
+                    </li>
+                    <li>
+                        <a href="admin/comment/them">Add Comments</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+            <li>
                 <a href="#"><i class="fa fa-users fa-fw"></i> Users<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>

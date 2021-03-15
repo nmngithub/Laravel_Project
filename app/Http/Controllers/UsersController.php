@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Http\Request;
 use App\Models\Users;
 use App\Models\Comment;
-use Jenssegers\Mongodb\Auth\User as Authenticatable;
 
 class UsersController extends Controller
 {
@@ -22,9 +20,9 @@ class UsersController extends Controller
         $this->validate($req,
         [
             'Ten'=>'required|min:3|max:100',
-            'Email'=>'required|email|min:3|max:30',
-            'password'=>'required|min:3|max:12',
-            'passwordAgain'=>'required|same:password|min:3|max:12',
+            'Email'=>'required|email|min:6|max:30',
+            'password'=>'required|min:6|max:12',
+            'passwordAgain'=>'required|same:password|min:6|max:12',
         ],
         [
             'Ten.required'=>'Bạn chưa nhập Tên người dùng!',
@@ -33,28 +31,27 @@ class UsersController extends Controller
 
             'Email.required'=>'Bạn chưa nhập Email!',
             'Email.email'=>'Bạn chưa nhập đúng định dạng Email!',
-            'Email.min'=>'Email phải từ 3 đến 30 ký tự!',
-            'Email.max'=>'Email phải từ 3 đến 30 ký tự!',
+            'Email.min'=>'Email phải từ 6 đến 30 ký tự!',
+            'Email.max'=>'Email phải từ 6 đến 30 ký tự!',
 
             'password.required'=>'Bạn chưa nhập Password!',
             'password.email'=>'Bạn chưa nhập đúng định dạng Password!',
-            'password.min'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
-            'password.max'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
+            'password.min'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
+            'password.max'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
 
             'passwordAgain.required'=>'Bạn chưa nhập lại Password!',
             'passwordAgain.email'=>'Bạn chưa nhập đúng định dạng Password!',
-            'passwordAgain.min'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
-            'passwordAgain.max'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
+            'passwordAgain.min'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
+            'passwordAgain.max'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
             'passwordAgain.same'=>'Mật khẩu nhập lại chưa khớp!',
         ]);
 
         $users = new Users;
-        $users->User_id =(int) $req->User_id;
         $users->name = $req->Ten;
         $users->email = $req->Email;
-        $users->password = bcrypt($req->password); 
         $users->quyen = $req->quyen;
         $users->block = $req->block;
+        $users->password = bcrypt($req->password); 
 
         $users->save();
 
@@ -72,9 +69,9 @@ class UsersController extends Controller
         $this->validate($req,
         [
             'Ten'=>'required|min:3|max:100',
-            'Email'=>'required|email|min:3|max:30',
-            'password'=>'required|min:3|max:12',
-            'passwordAgain'=>'required|same:password|min:3|max:12'
+            'Email'=>'required|email|min:6|max:30',
+            'password'=>'required|min:6|max:12',
+            'passwordAgain'=>'required|same:password|min:6|max:12'
         ],
         [
             'Ten.required'=>'Bạn chưa nhập Tên người dùng!',
@@ -83,18 +80,18 @@ class UsersController extends Controller
 
             'Email.required'=>'Bạn chưa nhập Email!',
             'Email.email'=>'Bạn chưa nhập đúng định dạng Email!',
-            'Email.min'=>'Email phải từ 3 đến 30 ký tự!',
-            'Email.max'=>'Email phải từ 3 đến 30 ký tự!',
+            'Email.min'=>'Email phải từ 6 đến 30 ký tự!',
+            'Email.max'=>'Email phải từ 6 đến 30 ký tự!',
 
             'password.required'=>'Bạn chưa nhập Password!',
             'password.email'=>'Bạn chưa nhập đúng định dạng Password!',
-            'password.min'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
-            'password.max'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
+            'password.min'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
+            'password.max'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
 
             'passwordAgain.required'=>'Bạn chưa nhập lại Password!',
             'passwordAgain.email'=>'Bạn chưa nhập đúng định dạng Password!',
-            'passwordAgain.min'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
-            'passwordAgain.max'=>'Mật khẩu phải từ 3 đến 12 ký tự!',
+            'passwordAgain.min'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
+            'passwordAgain.max'=>'Mật khẩu phải từ 6 đến 12 ký tự!',
             'passwordAgain.same'=>'Mật khẩu nhập lại chưa khớp!'
         ]);
         
@@ -112,7 +109,6 @@ class UsersController extends Controller
 
     public function getXoa($id){
         $users = Users::find($id);
-        dd($users);
         $users->delete();
         return redirect()->back()->with('thongbao', 'Đã xóa User thành công!');
     }
@@ -132,6 +128,9 @@ class UsersController extends Controller
             'password.required'=>'Bạn chưa nhập Password!'
         ]);
 
+        echo $req->email;
+        echo $req->password;
+        
         if(Auth::attempt(['email'=>$req->email, 'password'=>$req->password])){
             return redirect('admin/theloai/danhsach');
         }

@@ -20,34 +20,24 @@
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Tiêu Đề</th>
-                        <th>Tóm Tắt</th>
-                        <th>Thể Loại</th>
-                        <th>Loại Tin</th>
-                        <th>Nổi Bật</th>
+                        <th>Tin Tức ID</th>
+                        <th>User ID</th>
+                        <th>Nội Dung</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php $stt = 1; ?>
-                    @foreach ($tintuc as $item)
+                    @foreach ($comment as $item)
                         <tr class="odd gradeX" align="center">
                             <td>{{$stt}}</td>
                             <td>
-                                <p>{{$item->TieuDe}}</p>
+                                <p>{{$item->TinTuc_id}}</p>
                                 <img src="upload/tintuc/{{$item->Hinh}}" width="100px" alt="">
                             </td>
-                            <td>{{$item->TomTat}}</td>
-                            <td>{{$item->TheLoai}}</td>
-                            <td>{{$item->LoaiTin}}</td>
-                            <td>
-                                @if ($item->NoiBat == 0)
-                                    {{'Không'}}
-                                @else
-                                    {{'Có'}}
-                                @endif
-                            </td>
+                            <td>{{$item->User_id}}</td>
+                            <td>{{$item->NoiDung}}</td>
 
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/tintuc/xoa/{{$item->id}}"> Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/sua/{{$item->id}}">Edit</a></td>

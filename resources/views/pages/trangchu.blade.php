@@ -40,7 +40,7 @@
                         <div class="col-md-8 border-right">
                             @if(isset($tin1))
                             <div class="col-md-5">
-                                <a href="detail/{{$tin1->id}}/{{$tin1->TieuDeKhongDau}}.html">
+                                <a href="detail/{{$tin1['_id']}}">
                                     <img class="img-responsive" src="upload/tintuc/{{$tin1['Hinh']}}" alt="">
                                 </a>
                             </div>

@@ -6,13 +6,19 @@
         <div class="row">
             @include('layout.menu')
 
+            <?php 
+                function indam($str, $keywords){
+                   return  str_replace($keywords,"<b style='color:red;'>$keywords</b>", $str); 
+                }
+            ?>
+
             <div class="col-md-9 ">
                 <div class="panel panel-default">
-                    @foreach ($loaitin as $item)
+                    
                         <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                            <h4><b>{{$item->Ten}}</b></h4>
+                            <h4><b>Tìm kiếm : {{$keywords}}</b></h4>
                         </div>
-                    @endforeach
+                  
                     @foreach ($tintuc as $item)
                         <div class="row-item row">
                             <div class="col-md-3">
@@ -24,8 +30,8 @@
                             </div>
 
                             <div class="col-md-9">
-                                <h3>{{$item->TieuDe}}</h3>
-                                <p>{{$item->NoiDung}}</p>
+                                <h3>{!! indam($item->TieuDe, $keywords) !!}</h3>
+                                <p>{!! indam($item->TomTat, $keywords) !!}</p>
                                 <a class="btn btn-primary" href="detail/{{$item->_id}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
                             </div>
                             <div class="break"></div>
@@ -33,7 +39,13 @@
                     @endforeach
                     <!-- Pagination -->
                     <div class="row text-center">
-                                    <b>{{$tintuc->links()}}</b>
+                        <div class="col-lg-12">
+                            <ul class="pagination">
+                                <li>
+                                    <b> {!! $tintuc->appends(['keywords' =>$keywords])->links()!!}</b>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <!-- /.row -->
 

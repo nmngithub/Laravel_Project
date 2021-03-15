@@ -35,7 +35,7 @@ Route::post('admin/login',[UsersController::class, 'postLoginAdmin']);
 Route::get('admin/logout',[UsersController::class, 'getLogoutAdmin']);
 
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
     Route::group(['prefix'=>'theloai'], function(){
         Route::get('danhsach',[TheLoaiController::class, 'getDanhSach']);
@@ -72,7 +72,8 @@ Route::group(['prefix'=>'admin'], function(){
     });
 
     Route::group(['prefix'=>'comment'],function(){
-       Route::get('xoa/{id}/{idTinTuc}', [CommentController::class, 'getXoa']);
+        Route::get('danhsach',[CommentController::class, 'getDanhSach']);
+        Route::get('xoa/{id}/{idTinTuc}', [CommentController::class, 'getXoa']);
     });
 
     Route::group(['prefix'=>'slide'], function(){
@@ -102,13 +103,18 @@ Route::group(['prefix'=>'admin'], function(){
 
 });
 
-Route::get('trangchu', [PagesController::class, 'trangchu']);
-Route::get('contact', [PagesController::class, 'contact']);
-Route::get('about', [PagesController::class, 'about']);
-Route::get('register', [PagesController::class, 'register']);   
-Route::get('category/{Ten}', [PagesController::class, 'category']);
-Route::get('detail/{_id}', [PagesController::class, 'detail']);
+Route::get('trangchu', [PagesController::class, 'trangchu'])->middleware('login');
+Route::get('contact', [PagesController::class, 'contact'])->middleware('login');
+Route::get('about', [PagesController::class, 'about'])->middleware('login');
+Route::get('register', [PagesController::class, 'getRegister']);
+Route::post('register', [PagesController::class, 'postRegister']);  
+Route::get('category/{Ten}', [PagesController::class, 'category'])->middleware('login');
+Route::get('detail/{_id}', [PagesController::class, 'detail'])->middleware('login');
 Route::get('login',[PagesController::class, 'getLogin']);
 Route::post('login',[PagesController::class, 'postLogin']);
 Route::get('logout',[PagesController::class, 'logout']);
-Route::post('comment/{id}',[PagesController::class, 'comment']);
+Route::post('comment/{_id}',[PagesController::class, 'comment'])->middleware('login');
+Route::get('account',[PagesController::class, 'getAccount'])->middleware('login');
+Route::post('account',[PagesController::class, 'postAccount']);
+Route::get('search',[PagesController::class, 'search']);
+

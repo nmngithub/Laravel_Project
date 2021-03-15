@@ -7,7 +7,6 @@ use Jenssegers\Mongodb\Eloquent\Model;
 
 class TinTuc extends Model
 {
-    public $timestamps = false;
     use HasFactory;
     protected $collection = "tintuc";
 
