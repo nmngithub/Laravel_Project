@@ -21,28 +21,31 @@
                     <tr align="center">
                         <th>ID</th>
                         <th>Tin Tức ID</th>
-                        <th>User ID</th>
+                        <th>User Name</th>
                         <th>Nội Dung</th>
                         <th>Delete</th>
-                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                     <?php $stt = 1; ?>
-                    @foreach ($comment as $item)
-                        <tr class="odd gradeX" align="center">
-                            <td>{{$stt}}</td>
-                            <td>
-                                <p>{{$item->TinTuc_id}}</p>
-                                <img src="upload/tintuc/{{$item->Hinh}}" width="100px" alt="">
-                            </td>
-                            <td>{{$item->User_id}}</td>
-                            <td>{{$item->NoiDung}}</td>
+                    @foreach ($comment as $item)              
+                            <tr class="odd gradeX" align="center">
+                                <td>{{$stt}}</td>
+                                <td>
+                                    <p>{{$item->TinTuc_TieuDe}}</p>
+                                </td>
+                               
+                                <td>
+                                    {{$item['User_Name']}}
+                                </td>
+                               
+                                <td>{{$item->NoiDung}}</td>
 
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/tintuc/xoa/{{$item->id}}"> Delete</a></td>
-                            <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/tintuc/sua/{{$item->id}}">Edit</a></td>
-                        </tr>
-                        <?php $stt++; ?>
+                                <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/xoa/{{$item->id}}"> Delete</a></td>
+                            </tr>
+                            <?php $stt++; ?>
+                       
                     @endforeach
                     
                    
@@ -51,7 +54,7 @@
             </table>
         </div>
         <!-- /.row -->
-        {{$tintuc->links()}}
+        {!! $comment->links() !!}
     </div>
     <!-- /.container-fluid -->
 </div>

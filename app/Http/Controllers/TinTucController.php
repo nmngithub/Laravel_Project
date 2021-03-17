@@ -77,9 +77,9 @@ class TinTucController extends Controller
 
     public function postSua(Request $req, $id){
         $tintuc = TinTuc::find($id);
-        
         $tintuc->TieuDe = $req->TieuDe;
-        $tintuc->TieuDeKhongDau = changeTitle($req->TieuDe);
+        $tintuc->TieuDeKhongDau = changeTitle($req->TieuDeKhongDau);
+        $tintuc->idLoaiTin = $req->LoaiTin;
         $tintuc->TomTat = $req->TomTat;
         $tintuc->NoiDung = $req->NoiDung;
 
@@ -92,14 +92,14 @@ class TinTucController extends Controller
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
             while(file_exists('upload/tintuc'.$Hinh)){
+                unlink('upload/tintuc/'.$tintuc->Hinh);
                 $Hinh = Str::random(4)."_".$name;
             }
             $file->move('upload/tintuc',$Hinh);
+            
+            
             $tintuc->Hinh = $Hinh;
-        } else{
-            $tintuc->Hinh ="";
         }
-        $tintuc->NoiBat = $req->NoiBat;
         $tintuc->save();
 
         return redirect()->back()->with('thongbao','Sửa Thành Công!');

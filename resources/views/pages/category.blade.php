@@ -25,7 +25,7 @@
 
                             <div class="col-md-9">
                                 <h3>{{$item->TieuDe}}</h3>
-                                <p>{{$item->NoiDung}}</p>
+                                <p>{{$item->TomTat}}</p>
                                 <a class="btn btn-primary" href="detail/{{$item->_id}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
                             </div>
                             <div class="break"></div>

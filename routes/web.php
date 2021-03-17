@@ -73,7 +73,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
     Route::group(['prefix'=>'comment'],function(){
         Route::get('danhsach',[CommentController::class, 'getDanhSach']);
-        Route::get('xoa/{id}/{idTinTuc}', [CommentController::class, 'getXoa']);
+        Route::get('xoa/{id}', [CommentController::class, 'getXoa']);
     });
 
     Route::group(['prefix'=>'slide'], function(){
