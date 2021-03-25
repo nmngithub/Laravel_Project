@@ -11,24 +11,24 @@
             <!-- Blog Post -->
 
             <!-- Title -->
-            <h1>{{$tintuc->TieuDe}}</h1>
+            <h1>{{$Detail->TieuDe}}</h1>
             <!-- Author -->
             <p class="lead">
                 by <a href="#">Admin</a>
             </p>
 
             <!-- Preview Image -->
-            <img class="img-responsive" src="upload/tintuc/{{$tintuc->Hinh}}" alt="">
+            <img class="img-responsive" src="upload/tintuc/{{$Detail->Hinh}}" alt="">
 
             <!-- Date/Time -->
                 <p>
                     <span class="glyphicon glyphicon-time"></span> 
-                    Posted on {{$tintuc->created_at}}
+                    Posted on {{$Detail->created_at}}
                 </p>
                 <hr>
             <!-- Post Content -->
-            <p class="lead">{{$tintuc->TomTat}}</p>
-            <p>{!!$tintuc->NoiDung!!}</p>
+            <p class="lead">{{$Detail->TomTat}}</p>
+            <p>{!!$Detail->NoiDung!!}</p>
 
             <hr>
 
@@ -41,7 +41,7 @@
              <!-- Comments Form -->
              <div class="well">
                 <h4>Viết bình luận ...<span class="glyphicon glyphicon-pencil"></span></h4>
-                <form role="form" action="comment/{{$tintuc->_id}}" method="POST">
+                <form role="form" action="comment/{{$Detail->_id}}" method="POST">
                     @csrf
                     <div class="form-group">
                         <textarea class="form-control" name="NoiDung" rows="3"></textarea>

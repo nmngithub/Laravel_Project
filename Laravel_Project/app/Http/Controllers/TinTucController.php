@@ -4,24 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\LoaiTin;
-use App\Models\TheLoai;
-use App\Models\TinTuc;
+use App\Models\KindOfNews;
+use App\Models\Category;
+use App\Models\Detail;
+use App\Models\Comment;
 
 
 class TinTucController extends Controller
 {
-    public function getDanhSach(){
-        $tintuc = TinTuc::all()->sortByDesc('created_at');
-        return view('admin.tintuc.danhsach',['tintuc'=>$tintuc]);
+    public function getList(){
+        $Detail = Detail::all()->sortByDesc('created_at');
+        return view('admin.detail.list',['Detail'=>$Detail]);
     }
 
-    public function getThem(){
-        $theloai = TheLoai::all();
-        $loaitin = LoaiTin::all();
-        return view('admin.tintuc.them',['theloai'=>$theloai,'loaitin'=>$loaitin]);
+    public function getAdd(){
+        $Category = Category::all();
+        $KindOfNews = KindOfNews::all();
+        return view('admin.detail.add',['Category'=>$Category,'KindOfNews'=>$KindOfNews]);
     }
-    public function postThem(Request $req){
+    public function postAdd(Request $req){
         $this->validate($req,
             [
                 'TheLoai'=>'required',
@@ -42,18 +43,18 @@ class TinTucController extends Controller
             ]
         );
 
-        $tintuc = new TinTuc;
+        $Detail = new Detail;;
 
-        $tintuc->TieuDe = $req->TieuDe;
-        $tintuc->TieuDeKhongDau = changeTitle($req->TieuDe);
-        $tintuc->TomTat = $req->TomTat;
-        $tintuc->NoiDung = $req->NoiDung;
+        $Detail->TieuDe = $req->TieuDe;
+        $Detail->TieuDeKhongDau = changeTitle($req->TieuDe);
+        $Detail->TomTat = $req->TomTat;
+        $Detail->NoiDung = $req->NoiDung;
 
         if($req->hasFile('Hinh')){
             $file = $req->file('Hinh');
-            $duoi = $file->getClientOriginalExtension();
-            if($duoi != 'jpg' && $duoi != 'png'){
-                return redirect()->back()->with('thongbao','Hình ảnh phải có đuôi là jpg hoặc png!');
+            $format = $file->getClientOriginalExtension();
+            if($format != 'jpg' && $format != 'png'){
+                return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
@@ -61,36 +62,36 @@ class TinTucController extends Controller
                 $Hinh = Str::random(4)."_".$name;
             }
             $file->move('upload/tintuc',$Hinh);
-            $tintuc->Hinh = $Hinh;
+            $Detail->Hinh = $Hinh;
         } else{
-            $tintuc->Hinh ="";
+            $Detail->Hinh ="";
         }
-        $tintuc->NoiBat = $req->NoiBat;
-        $tintuc->TheLoai = $req->TheLoai;
-        $tintuc->LoaiTin = $req->LoaiTin;
-        $tintuc->save();
+        $Detail->NoiBat = $req->NoiBat;
+        $Detail->TheLoai = $req->TheLoai;
+        $Detail->LoaiTin = $req->LoaiTin;
+        $Detail->save();
 
-        return redirect()->back()->with('thongbao','Thêm Thành Công!');
+        return redirect()->back()->with('notification','Đã thêm Thành Công!');
     }
 
-    public function getSua($id){
-        $tintuc = TinTuc::find($id);
-        return view('admin/tintuc/sua',['tintuc'=>$tintuc]);
+    public function getEdit($id){
+        $Detail = Detail::find($id);
+        return view('admin.detail.edit',['Detail'=>$Detail]);
     }
 
-    public function postSua(Request $req, $id){
-        $tintuc = TinTuc::find($id);
-        $tintuc->TieuDe = $req->TieuDe;
-        $tintuc->TieuDeKhongDau = changeTitle($req->TieuDeKhongDau);
-        $tintuc->idLoaiTin = $req->LoaiTin;
-        $tintuc->TomTat = $req->TomTat;
-        $tintuc->NoiDung = $req->NoiDung;
+    public function postEdit(Request $req, $id){
+        $Detail = Detail::find($id);
+        $Detail->TieuDe = $req->TieuDe;
+        $Detail->TieuDeKhongDau = changeTitle($req->TieuDeKhongDau);
+        $Detail->idLoaiTin = $req->LoaiTin;
+        $Detail->TomTat = $req->TomTat;
+        $Detail->NoiDung = $req->NoiDung;
 
         if($req->hasFile('Hinh')){
             $file = $req->file('Hinh');
-            $duoi = $file->getClientOriginalExtension();
-            if($duoi != 'jpg' && $duoi != 'png'){
-                return redirect()->back()->with('thongbao','Hình ảnh phải có đuôi là jpg hoặc png!');
+            $format = $file->getClientOriginalExtension();
+            if($format != 'jpg' && $format != 'png'){
+                return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
@@ -101,18 +102,19 @@ class TinTucController extends Controller
             $file->move('upload/tintuc',$Hinh);
             
             
-            $tintuc->Hinh = $Hinh;
+            $Detail->Hinh = $Hinh;
         }
-        $tintuc->save();
+        $Detail->save();
 
-        return redirect()->back()->with('thongbao','Sửa Thành Công!');
+        return redirect()->back()->with('notification','Đã sửa Thành Công!');
 
     }
 
-    public function getXoa($id){
-        $tintuc = TinTuc::find($id);
-        
-        $tintuc->delete();
-        return redirect()->back()->with('thongbao','Đã xóa thành công!');
+    public function getDelete($id){
+        $Detail = Detail::find($id);
+        $comment = Comment::where('TinTuc_id', $id);
+        $comment->delete();
+        $Detail->delete();
+        return redirect()->back()->with('notification','Đã xóa thành công!');
     }
 }

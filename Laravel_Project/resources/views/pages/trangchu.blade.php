@@ -22,33 +22,33 @@
 
                 <div class="panel-body">
                     <!-- item -->
-                @foreach ($theloai as $item1)
+                @foreach ($Category as $item1)
                     <div class="row-item row">
                         <h3>
                             <a href="#">{{$item1->Ten}}</a> | 
-                            @foreach ($lt[$item1->Ten] as $item2)
-                            <small><a href="category/{{$item2}}"><i>{{$item2}}</i></a>/</small>
+                            @foreach ($KON[$item1->Ten] as $item2)
+                            <small><a href="kindofnews/{{$item2}}"><i>{{$item2}}</i></a>/</small>
                             @endforeach	
                         </h3>
 
                         <?php 
-                                $data = $tintuc->where('TheLoai',$item1->Ten)->sortByDesc('_id')->take(4);
-                                $tin1 = $data->shift();
+                                $data = $Detail->where('TheLoai',$item1->Ten)->sortByDesc('_id')->take(4);
+                                $oneNews = $data->shift();
                         ?>
 
                
                         <div class="col-md-8 border-right">
-                            @if(isset($tin1))
+                            @if(isset($oneNews))
                             <div class="col-md-5">
-                                <a href="detail/{{$tin1['_id']}}">
-                                    <img class="img-responsive" src="upload/tintuc/{{$tin1['Hinh']}}" alt="">
+                                <a href="detail/{{$oneNews['_id']}}">
+                                    <img class="img-responsive" src="upload/tintuc/{{$oneNews['Hinh']}}" alt="">
                                 </a>
                             </div>
 
                             <div class="col-md-7">
-                                <h3>{{$tin1['TieuDe']}}</h3>
-                                <p>{{$tin1['TomTat']}}</p>
-                                <a class="btn btn-primary" href="detail/{{$tin1['_id']}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                <h3>{{$oneNews['TieuDe']}}</h3>
+                                <p>{{$oneNews['TomTat']}}</p>
+                                <a class="btn btn-primary" href="detail/{{$oneNews['_id']}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
                             </div>
                             @endif
                         </div>

@@ -21,7 +21,7 @@
                     
                 <li><i class="fa fa-user fa-fw"></i>{{Auth::user()->name}}</a>
                 </li>
-                <li><a href="admin/users/sua/{{Auth::user()->id}}"><i class="fa fa-gear fa-fw"></i>Edit</a>
+                <li><a href="admin/users/edit/{{Auth::user()->id}}"><i class="fa fa-gear fa-fw"></i>Edit</a>
                 </li>
                 <li class="divider"></li>
                 <li><a href="admin/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

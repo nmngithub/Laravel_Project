@@ -4,16 +4,14 @@
             Menu
         </li>
       
-        @foreach ($theloai as $item1)
+        @foreach ($Category as $item1)
             <li class="list-group-item menu1">
                 {{$item1->Ten}}
             </li>
             <ul>
-
-                    @foreach ($lt[$item1->Ten] as $item2)
+                    @foreach ($KON[$item1->Ten] as $item2)
                     <li class="list-group-item">
-                        
-                        <a href="category/{{$item2}}">{{$item2}}</a>
+                        <a href="kindofnews/{{$item2}}">{{$item2}}</a>
                     </li>   
                     @endforeach
             </ul>

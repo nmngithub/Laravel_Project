@@ -8,16 +8,16 @@ use App\Models\Slide;
 
 class SlideController extends Controller
 {
-    public function getDanhSach(){
+    public function getList(){
         $slide = Slide::all()->sortByDesc('created_at');
-        return view('admin.slide.danhsach',['slide'=>$slide]);
+        return view('admin.slide.list',['slide'=>$slide]);
     }
 
-    public function getThem(){
-        return view('admin.slide.them');
+    public function getAdd(){
+        return view('admin.slide.add');
     }
 
-    public function postThem(Request $req){
+    public function postAdd(Request $req){
         $this->validate($req,
         [
             'Ten'=>'required|unique:Slide,Ten|min:3|max:100',
@@ -37,9 +37,9 @@ class SlideController extends Controller
 
         if($req->hasFile('Hinh')){
             $file = $req->file('Hinh');
-            $duoi = $file->getClientOriginalExtension();
-            if($duoi != 'jpg' && $duoi != 'png'){
-                return redirect()->back()->with('thongbao','Hình ảnh phải có đuôi là jpg hoặc png!');
+            $format = $file->getClientOriginalExtension();
+            if($format != 'jpg' && $format != 'png'){
+                return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
@@ -55,20 +55,20 @@ class SlideController extends Controller
         $slide->NoiDung = $req->NoiDung;
 
         if($req->has('Link'))
-        $slide->Link = $req->Link;
+        $slide->link = $req->Link;
 
         $slide->save();
 
-        return  redirect()->back()->with('thongbao', 'Đã Thêm Thành Công!');
+        return  redirect()->back()->with('notification', 'Đã Thêm Thành Công!');
        
     }
 
-    public function getSua($id){
+    public function getEdit($id){
         $slide = Slide::find($id);
-        return view('admin/slide/sua',['slide'=>$slide]);
+        return view('admin.slide.edit',['slide'=>$slide]);
     }
 
-    public function postSua(Request $req, $id){
+    public function postEdit(Request $req, $id){
         $slide = Slide::find($id);
         $slide->Ten = $req->Ten;
         $slide->NoiDung = $req->NoiDung;
@@ -76,9 +76,9 @@ class SlideController extends Controller
 
         if($req->hasFile('Hinh')){
             $file = $req->file('Hinh');
-            $duoi = $file->getClientOriginalExtension();
-            if($duoi != 'jpg' && $duoi != 'png'){
-                return redirect()->back()->with('thongbao','Hình ảnh phải có đuôi là jpg hoặc png!');
+            $format = $file->getClientOriginalExtension();
+            if($format != 'jpg' && $format != 'png'){
+                return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
@@ -90,15 +90,16 @@ class SlideController extends Controller
 
             $slide->Hinh = $Hinh;
         }
+     
         $slide->save();
 
-        return redirect()->back()->with('thongbao','Sửa Thành Công!');
+        return redirect()->back()->with('notification','Đã sửa Thành Công!');
 
     }
 
-    public function getXoa($id){
+    public function getDelete($id){
         $slide = Slide::find($id);
         $slide->delete();
-        return redirect()->back()->with('thongbao','Đã xóa thành công!');
+        return redirect()->back()->with('notification','Đã xóa thành công!');
     }
 }

@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TheLoai;
+use App\Models\Category;
 
 class TheLoaiController extends Controller
 {
-    public function getDanhSach(){
-        $theloai = TheLoai::all()->sortByDesc('created_at');
-        return view('admin.theloai.danhsach',['theloai'=>$theloai]);
+    public function getList(){
+        $Category = Category::all()->sortByDesc('created_at');
+        return view('admin.category.list',['Category'=>$Category]);
     }
 
-    public function getThem(){
-        return view('admin.theloai.them');
+    public function getAdd(){
+        return view('admin.category.add');
     }
 
-    public function postThem(Request $req){
+    public function postAdd(Request $req){
         $this->validate($req,
 
         [
@@ -29,21 +29,21 @@ class TheLoaiController extends Controller
             'Ten.max'=>'Tên phải từ 3 đến 100 ký tự!',
         ]);
         
-        $theloai = new TheLoai;
-        $theloai->Ten = $req->Ten;
-        $theloai->TenKhongDau = changeTitle($req->Ten);
-        $theloai->save();
+        $Category = new Category;
+        $Category->Ten = $req->Ten;
+        $Category->TenKhongDau = changeTitle($req->Ten);
+        $Category->save();
 
-        return redirect()->back()->with('thongbao', 'Thêm thành công!');
+        return redirect()->back()->with('notification', 'Đã thêm thành công!');
     }
 
-    public function getSua($id){
-        $theloai = TheLoai::find($id);
-        return view('admin.theloai.sua',['theloai'=>$theloai]);
+    public function getEdit($id){
+        $Category = Category::find($id);
+        return view('admin.category.edit',['Category'=>$Category]);
     }
 
-    public function postSua(Request $req, $id){
-        $theloai = TheLoai::find($id);
+    public function postEdit(Request $req, $id){
+        $Category = Category::find($id);
         $this->validate($req,
         [
             'Ten'=>'required|unique:theloai,Ten|min:3|max:100'
@@ -55,17 +55,17 @@ class TheLoaiController extends Controller
             'Ten.max'=>'Tên phải từ 3 đến 100 ký tự'
         ]);
 
-        $theloai->Ten = $req->Ten;
-        $theloai->TenKhongDau = changeTitle($req->Ten);
-        $theloai->save();
+        $Category->Ten = $req->Ten;
+        $Category->TenKhongDau = changeTitle($req->Ten);
+        $Category->save();
 
-        return redirect()->back()->with('thongbao','Sửa thành công');
+        return redirect()->back()->with('notification','Đã sửa thành công!');
     }
 
-    public function getXoa($id){
-        $theloai = TheLoai::find($id);
-        $theloai->delete();
+    public function getDelete($id){
+        $Category = Category::find($id);
+        $Category->delete();
 
-        return redirect()->back()->with('thongbao', 'Đã xóa thành công');
+        return redirect()->back()->with('notification', 'Đã xóa thành công!');
     }
 }

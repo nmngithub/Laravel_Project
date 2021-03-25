@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\TheLoai;
-use App\Models\LoaiTin;
-use App\Models\TinTuc;
+use App\Models\Category;
+use App\Models\KindOfNews;
+use App\Models\Detail;
 use App\Models\Users;
 use App\Models\Slide;
 use App\Http\Controllers\TheLoaiController;
@@ -37,67 +37,67 @@ Route::get('admin/logout',[UsersController::class, 'getLogoutAdmin']);
 
 Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
-    Route::group(['prefix'=>'theloai'], function(){
-        Route::get('danhsach',[TheLoaiController::class, 'getDanhSach']);
+    Route::group(['prefix'=>'category'], function(){
+        Route::get('list',[TheLoaiController::class, 'getList']);
 
-        Route::get('them',[TheLoaiController::class, 'getThem']);
-        Route::post('them',[TheLoaiController::class, 'postThem']);
+        Route::get('add',[TheLoaiController::class, 'getAdd']);
+        Route::post('add',[TheLoaiController::class, 'postAdd']);
 
-        Route::get('sua/{_id}',[TheLoaiController::class, 'getSua']);
-        Route::post('sua/{_id}',[TheLoaiController::class, 'postSua']);
+        Route::get('edit/{id}',[TheLoaiController::class, 'getEdit']);
+        Route::post('edit/{id}',[TheLoaiController::class, 'postEdit']);
 
-        Route::get('xoa/{id}', [TheLoaiController::class, 'getXoa']);
+        Route::get('delete/{id}', [TheLoaiController::class, 'getDelete']);
     });
-    Route::group(['prefix'=>'loaitin'], function(){
-        Route::get('danhsach',[LoaiTinController::class, 'getDanhSach']);
+    Route::group(['prefix'=>'kindofnews'], function(){
+        Route::get('list',[LoaiTinController::class, 'getList']);
 
-        Route::get('them',[LoaiTinController::class, 'getThem']);
-        Route::post('them',[LoaiTinController::class, 'postThem']);
+        Route::get('add',[LoaiTinController::class, 'getAdd']);
+        Route::post('add',[LoaiTinController::class, 'postAdd']);
 
-        Route::get('sua/{id}',[LoaiTinController::class, 'getSua']);
-        Route::post('sua/{id}',[LoaiTinController::class, 'postSua']);
+        Route::get('edit/{id}',[LoaiTinController::class, 'getEdit']);
+        Route::post('edit/{id}',[LoaiTinController::class, 'postEdit']);
 
-        Route::get('xoa/{id}', [LoaiTinController::class, 'getXoa']);
+        Route::get('delete/{id}', [LoaiTinController::class, 'getDelete']);
     });
-    Route::group(['prefix'=>'tintuc'], function(){
-        Route::get('danhsach',[TinTucController::class, 'getDanhSach']);
+    Route::group(['prefix'=>'detail'], function(){
+        Route::get('list',[TinTucController::class, 'getList']);
 
-        Route::get('them',[TinTucController::class, 'getThem']);
-        Route::post('them',[TinTucController::class, 'postThem']);
+        Route::get('add',[TinTucController::class, 'getAdd']);
+        Route::post('add',[TinTucController::class, 'postAdd']);
 
-        Route::get('sua/{id}',[TinTucController::class, 'getSua']);
-        Route::post('sua/{id}',[TinTucController::class, 'postSua']);
+        Route::get('edit/{id}',[TinTucController::class, 'getEdit']);
+        Route::post('edit/{id}',[TinTucController::class, 'postEdit']);
 
-        Route::get('xoa/{id}', [TinTucController::class, 'getXoa']);
+        Route::get('delete/{id}', [TinTucController::class, 'getDelete']);
     });
 
     Route::group(['prefix'=>'comment'],function(){
-        Route::get('danhsach',[CommentController::class, 'getDanhSach']);
-        Route::get('xoa/{id}', [CommentController::class, 'getXoa']);
+        Route::get('list',[CommentController::class, 'getList']);
+        Route::get('delete/{id}', [CommentController::class, 'getDelete']);
     });
 
     Route::group(['prefix'=>'slide'], function(){
-        Route::get('danhsach',[SlideController::class, 'getDanhSach']);
+        Route::get('list',[SlideController::class, 'getList']);
 
-        Route::get('them',[SlideController::class, 'getThem']);
-        Route::post('them',[SlideController::class, 'postThem']);
+        Route::get('add',[SlideController::class, 'getAdd']);
+        Route::post('add',[SlideController::class, 'postAdd']);
 
-        Route::get('sua/{id}',[SlideController::class, 'getSua']);
-        Route::post('sua/{id}',[SlideController::class, 'postSua']);
+        Route::get('edit/{id}',[SlideController::class, 'getEdit']);
+        Route::post('edit/{id}',[SlideController::class, 'postEdit']);
 
-        Route::get('xoa/{id}', [SlideController::class, 'getXoa']);
+        Route::get('delete/{id}', [SlideController::class, 'getDelete']);
     });
 
-    Route::group(['prefix'=>'users'], function(){
-        Route::get('danhsach',[UsersController::class, 'getDanhSach']);
+    Route::group(['prefix'=>'account'], function(){
+        Route::get('list',[UsersController::class, 'getList']);
 
-        Route::get('them',[UsersController::class, 'getThem']);
-        Route::post('them',[UsersController::class, 'postThem']);
+        Route::get('add',[UsersController::class, 'getAdd']);
+        Route::post('add',[UsersController::class, 'postAdd']);
 
-        Route::get('sua/{id}',[UsersController::class, 'getSua']);
-        Route::post('sua/{id}',[UsersController::class, 'postSua']);
+        Route::get('edit/{id}',[UsersController::class, 'getEdit']);
+        Route::post('edit/{id}',[UsersController::class, 'postEdit']);
 
-        Route::get('xoa/{id}', [UsersController::class, 'getXoa']);
+        Route::get('delete/{id}', [UsersController::class, 'getDelete']);
     });
     
 
@@ -108,7 +108,7 @@ Route::get('contact', [PagesController::class, 'contact'])->middleware('login');
 Route::get('about', [PagesController::class, 'about'])->middleware('login');
 Route::get('register', [PagesController::class, 'getRegister']);
 Route::post('register', [PagesController::class, 'postRegister']);  
-Route::get('category/{Ten}', [PagesController::class, 'category'])->middleware('login');
+Route::get('kindofnews/{Ten}', [PagesController::class, 'kindofnews'])->middleware('login');
 Route::get('detail/{_id}', [PagesController::class, 'detail'])->middleware('login');
 Route::get('login',[PagesController::class, 'getLogin']);
 Route::post('login',[PagesController::class, 'postLogin']);

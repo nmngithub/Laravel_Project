@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\LoaiTin;
-use App\Models\TheLoai;
-use App\Models\TinTuc;
+use App\Models\KindOfNews;
+use App\Models\Category;
+use App\Models\Detail;
 
 class LoaiTinController extends Controller
 {
-    public function getDanhSach(){
-        $loaitin = LoaiTin::all()->sortByDesc('created_at');
-        return view('admin.loaitin.danhsach',['loaitin'=>$loaitin]);
+    public function getList(){
+        $KindOfNews = KindOfNews::all()->sortByDesc('created_at');
+        return view('admin.kindofnews.list',['KindOfNews'=>$KindOfNews]);
     }
 
-    public function getThem(){
-        $theloai = TheLoai::select('Ten')->get();
-        return view('admin.loaitin.them',['theloai'=>$theloai]);
+    public function getAdd(){
+        $Category = Category::select('Ten')->get();
+        return view('admin.kindofnews.add',['Category'=>$Category]);
     }
-    public function postThem(Request $req){ 
+    public function postAdd(Request $req){ 
        
         $this->validate($req,
         [
@@ -31,26 +31,26 @@ class LoaiTinController extends Controller
             'Ten.max'=>'Tên loại tin phải từ 3 đến 100 ký tự!',
         ]);
         
-        $loaitin = new LoaiTin;
+        $KindOfNews = new KindOfNews;
 
-        $loaitin->TheLoai = $req->TheLoai;
-        $loaitin->Ten = $req->Ten;
-        $loaitin->TenKhongDau = changeTitle($req->Ten);
+        $KindOfNews->TheLoai = $req->TheLoai;
+        $KindOfNews->Ten = $req->Ten;
+        $KindOfNews->TenKhongDau = changeTitle($req->Ten);
         
-        $loaitin->save();
+        $KindOfNews->save();
 
-        return redirect()->back()->with('thongbao','Thêm thành công!');
+        return redirect()->back()->with('notification','Đã thêm thành công!');
     }
 
 
-    public function getSua($id){
-        $tl = TheLoai::all();
-        $loaitin = LoaiTin::find($id);
-        return view('admin.loaitin.sua', ['loaitin'=>$loaitin,'tl'=>$tl]);
+    public function getEdit($id){
+        $Category = Category::all();
+        $KindOfNews = KindOfNews::find($id);
+        return view('admin.kindofnews.edit', ['KindOfNews'=>$KindOfNews,'Category'=>$Category]);
         
     }
-    public function postSua(Request $req, $id){
-        $loaitin = LoaiTin::find($id);
+    public function postEdit(Request $req, $id){
+        $KindOfNews = KindOfNews::find($id);
 
         $this->validate($req,
         [
@@ -64,21 +64,21 @@ class LoaiTinController extends Controller
             'Ten.max'=>'Tên loại tin phải từ 3 đến 100 ký tự!',
         ]);
         
-        $loaitin->Ten = $req->Ten;
-        $loaitin->TenKhongDau = changeTitle($req->Ten);
+        $KindOfNews->Ten = $req->Ten;
+        $KindOfNews->TenKhongDau = changeTitle($req->Ten);
         
         
-        $loaitin->save();
+        $KindOfNews->save();
 
-        return redirect()->back()->with('thongbao','Sửa Thành Công');   
+        return redirect()->back()->with('notification','Đã sửa Thành Công!');   
     }
 
-    public function getXoa($id) {
+    public function getDelete($id) {
 
-    	$loaitin = loaitin::find($id);
-        $tintuc = tintuc::where('loaitin',$id);
-        $tintuc->delete();
-    	$loaitin->delete();
-    	return redirect()->back()->with('thongbao','Xóa thành công');
+    	$KindOfNews = KindOfNews::find($id);
+        $Detail = Detail::where('loaitin',$id);
+        $Detail->delete();
+    	$KindOfNews->delete();
+    	return redirect()->back()->with('notification','Đã xóa thành công!');
     }
 }

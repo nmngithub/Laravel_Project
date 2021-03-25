@@ -8,15 +8,15 @@ use App\Models\Comment;
 
 class UsersController extends Controller
 {
-    public function getDanhSach(){
+    public function getList(){
         $users = Users::all()->sortByDesc('created_at');
-        return view('admin.users.danhsach',['users'=>$users]);
+        return view('admin.account.list',['users'=>$users]);
     }
 
-    public function getThem(){
-        return view('admin.users.them');
+    public function getAdd(){
+        return view('admin.account.add');
     }
-    public function postThem(Request $req){
+    public function postAdd(Request $req){
         $this->validate($req,
         [
             'Ten'=>'required|min:3|max:100',
@@ -55,15 +55,15 @@ class UsersController extends Controller
 
         $users->save();
 
-        return redirect()->back()->with('thongbao', 'Đã thêm thành công!');
+        return redirect()->back()->with('notification', 'Đã thêm thành công!');
     }
 
-    public function getSua($id){
+    public function getEdit($id){
         $users = Users::find($id);
-        return view('admin/users/sua',['users'=>$users]);
+        return view('admin.account.edit',['users'=>$users]);
     }
 
-    public function postSua(Request $req, $id){
+    public function postEdit(Request $req, $id){
         $users = Users::find($id);
         
         $this->validate($req,
@@ -103,18 +103,20 @@ class UsersController extends Controller
 
         $users->save();
 
-        return redirect()->back()->with('thongbao', 'Đã sửa thành công!');
+        return redirect()->back()->with('notification', 'Đã sửa thành công!');
     }
 
 
-    public function getXoa($id){
+    public function getDelete($id){
         $users = Users::find($id);
+        $comment = Comment::where('User_id', $id);
+        $comment->delete();
         $users->delete();
-        return redirect()->back()->with('thongbao', 'Đã xóa User thành công!');
+        return redirect()->back()->with('notification', 'Đã xóa User thành công!');
     }
 
     public function getLoginAdmin(){
-        return view('admin/login');
+        return view('admin.login');
     }
 
     public function postLoginAdmin(Request $req){
@@ -132,10 +134,10 @@ class UsersController extends Controller
         echo $req->password;
         
         if(Auth::attempt(['email'=>$req->email, 'password'=>$req->password])){
-            return redirect('admin/theloai/danhsach');
+            return redirect('admin/category/list');
         }
         else{
-            return redirect()->back()->with('thongbao', 'Tài khoản hoặc mật khẩu không chính xác!');
+            return redirect()->back()->with('notification', 'Tài khoản hoặc mật khẩu không chính xác!');
         }
     }
 

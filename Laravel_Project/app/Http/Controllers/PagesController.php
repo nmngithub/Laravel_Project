@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\TheLoai;
-use App\Models\LoaiTin;
-use App\Models\TinTuc;
+use App\Models\Category;
+use App\Models\KindOfNews;
+use App\Models\Detail;
 use App\Models\Users;
 use App\Models\Comment;
 use App\Models\Slide;
@@ -15,31 +15,103 @@ class PagesController extends Controller
 {
     
     public function trangchu(){
-        $theloai = TheLoai::all()->sortByDesc('created_at');
+        $Category = Category::all()->sortByDesc('created_at');
         $slide = Slide::all();
-        $tintuc = TinTuc::all()->sortByDesc('created_at');
+        $Detail = Detail::all()->sortByDesc('created_at');
 
-        $loaitin = LoaiTin::select('TheLoai','Ten')->get()->toArray();
-        $lt = [];
+        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KON = [];
   
-        foreach($loaitin as $key2 => $value2)
+        foreach($KindOfNews as $key => $value)
         {
             
-            $lt[$value2['TheLoai']][$value2['_id']] = $value2['Ten'];
+            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
         }
 
-        return view('pages.trangchu',['slide'=>$slide,'theloai'=>$theloai,'lt'=>$lt,'tintuc'=>$tintuc]);
+        return view('pages.trangchu',['slide'=>$slide,'Category'=>$Category,'KON'=>$KON,'Detail'=>$Detail]);
     }
 
-    public function contact(){
-        $slide = Slide::all();
-        $theloai = TheLoai::all()->sortByDesc('created_at');
-        $loai = LoaiTin::select('TheLoai','Ten')->get()->toArray();
-        $lt = [];
-        foreach($loai as $key => $value){
-            $lt[$value['TheLoai']][$value['_id']] = $value['Ten'];
+    public function kindofnews($Ten){
+        $KindOfNews1 = KindOfNews::where('Ten',$Ten)->get();
+        $Detail = Detail::where('LoaiTin',$Ten)->paginate(3);
+        $Category = Category::all();
+        $KindOfNews2 = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KON = [];
+  
+        foreach($KindOfNews2 as $key => $value)
+        {
+            
+            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
         }
-        return view('pages.contact',['slide'=>$slide,'theloai'=>$theloai,'lt'=>$lt]);
+        return view('pages.kindofnews',['KindOfNews'=>$KindOfNews1,'Category'=>$Category,'Detail'=>$Detail,'KON'=>$KON]);
+    }
+
+    public function detail($_id){
+       
+        $Detail = Detail::find($_id);
+        $tinnoibat = Detail::where('NoiBat', 1)->take(3)->get(); 
+        $tinlienquan = Detail::where('LoaiTin',$Detail->LoaiTin)->where('_id','<>',$_id)->take(3)->get();
+
+        //Comment, Users
+        $users = Users::select('name')->get()->toArray();
+        $cm = Comment::select('User_id','TinTuc_id','NoiDung','created_at')->where('TinTuc_id',$_id)->get()->toArray();
+        $showinfo = [];
+        foreach($cm as $key1 => $value1){
+            foreach($users as $key2 => $value2){
+                if($value1['User_id'] == $value2['_id']){
+                    $value1['User_Name'] = $value2['name'];
+                    $showinfo[$key1] = $value1;
+                }
+            }
+        }
+        
+        return view('pages.detail', ['Detail'=>$Detail, 'tinnoibat'=>$tinnoibat, 'tinlienquan'=>$tinlienquan, 'showinfo'=>$showinfo]);
+    }
+
+    public function comment(Request $req, $_id){
+        $comment = New Comment;
+        $user = new Users;
+        if(Auth::user()->block == 1){
+            return redirect()->back()->with('thongbao','Bạn đang bị block!');
+        }
+        else{
+            $comment->User_id = Auth::user()->id;
+            $comment->TinTuc_id = $_id;
+            $comment->NoiDung = $req->NoiDung;
+            $comment->save();
+        }
+        
+
+
+        return redirect()->back()->with('thongbao','Bạn đã comment!');;
+    }
+
+    public function getLogin(){
+        return view('pages.login');
+    }
+
+    public function postLogin(Request $req){
+        $this->validate($req,
+        [
+            'email'=>'required',
+            'password'=>'required'
+        ],
+        [
+            'email.required'=>'Bạn chưa nhập Email!',
+            'password.required'=>'Bạn chưa nhập Password!'
+        ]);
+
+        if(Auth::attempt(['email'=>$req->email, 'password'=>$req->password])){
+            return redirect('trangchu');
+        }
+        else{
+            return redirect()->back()->with('thongbao', 'Tài khoản hoặc mật khẩu không chính xác!');
+        }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect('login');
     }
 
     public function getRegister(){
@@ -82,105 +154,6 @@ class PagesController extends Controller
 
     }
 
-    public function category($Ten){
-        $loaitin = LoaiTin::where('Ten',$Ten)->get();
-        $tintuc = TinTuc::where('LoaiTin',$Ten)->paginate(3);
-        $theloai = TheLoai::all();
-        $loai = LoaiTin::select('TheLoai','Ten')->get()->toArray();
-        $lt = [];
-  
-        foreach($loai as $key2 => $value2)
-        {
-            
-            $lt[$value2['TheLoai']][$value2['_id']] = $value2['Ten'];
-        }
-        return view('pages.category',['loaitin'=>$loaitin,'theloai'=>$theloai,'tintuc'=>$tintuc,'lt'=>$lt]);
-    }
-
-    public function detail($_id){
-       
-        $tintuc = TinTuc::find($_id);
-        $tinnoibat = TinTuc::where('NoiBat', 1)->take(3)->get(); 
-        $tinlienquan = TinTuc::where('LoaiTin',$tintuc->LoaiTin)->where('_id','<>',$_id)->take(3)->get();
-
-        //Comment, Users
-        $users = Users::select('name')->get()->toArray();
-        $cm = Comment::select('User_id','TinTuc_id','NoiDung','created_at')->where('TinTuc_id',$_id)->get()->toArray();
-        $showinfo = [];
-        foreach($cm as $key1 => $value1){
-            foreach($users as $key2 => $value2){
-                if($value1['User_id'] == $value2['_id']){
-                    $value1['User_Name'] = $value2['name'];
-                    $showinfo[$key1] = $value1;
-                }
-            }
-        }
-        
-        return view('pages.detail', ['tintuc'=>$tintuc, 'tinnoibat'=>$tinnoibat, 'tinlienquan'=>$tinlienquan, 'showinfo'=>$showinfo]);
-    }
-
-    public function about(){
-        $slide = Slide::all();
-        $theloai = TheLoai::all();
-        $loai = LoaiTin::select('TheLoai','Ten')->get()->toArray();
-        $lt = [];
-  
-        foreach($loai as $key2 => $value2)
-        {
-            
-            $lt[$value2['TheLoai']][$value2['_id']] = $value2['Ten'];
-        }
-    
-        return view('pages.about',['slide'=>$slide,'theloai'=>$theloai,'lt'=>$lt]);
-    }
-
-    public function getLogin(){
-        return view('pages.login');
-    }
-
-    public function postLogin(Request $req){
-        $this->validate($req,
-        [
-            'email'=>'required',
-            'password'=>'required'
-        ],
-        [
-            'email.required'=>'Bạn chưa nhập Email!',
-            'password.required'=>'Bạn chưa nhập Password!'
-        ]);
-
-        if(Auth::attempt(['email'=>$req->email, 'password'=>$req->password])){
-            return redirect('trangchu');
-        }
-        else{
-            return redirect()->back()->with('thongbao', 'Tài khoản hoặc mật khẩu không chính xác!');
-        }
-    }
-
-    public function logout(){
-        Auth::logout();
-        return redirect('login');
-    }
-
-    public function comment(Request $req, $_id){
-        $comment = New Comment;
-        $user = new Users;
-        if(Auth::user()->block == 1){
-            return redirect()->back()->with('thongbao','Bạn đang bị block!');
-        }
-        else{
-            $comment->User_id = Auth::user()->id;
-            $comment->TinTuc_id = $_id;
-            $comment->NoiDung = $req->NoiDung;
-            $comment->save();
-        }
-        
-
-
-        return redirect()->back()->with('thongbao','Bạn đã comment!');;
-    }
-
-
     public function getAccount(){
         return view('pages.account');
     }
@@ -215,8 +188,8 @@ class PagesController extends Controller
 
     public function search(Request $req){
         $keywords = $req->keywords;
-        $tintuc = TinTuc::where('Tieude','like',"%$keywords%")->orWhere('TomTat','like',"%$keywords%")->orWhere('NoiDung','like',"%$keywords%")->take(30)->paginate(5);
-        return view('pages.search',['tintuc'=>$tintuc, 'keywords'=>$keywords]);
+        $Detail = Detail::where('Tieude','like',"%$keywords%")->orWhere('TomTat','like',"%$keywords%")->orWhere('NoiDung','like',"%$keywords%")->take(30)->paginate(5);
+        return view('pages.search',['Detail'=>$Detail, 'keywords'=>$keywords]);
     }
 
 }
