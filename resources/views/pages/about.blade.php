@@ -10,9 +10,9 @@
 
         <div class="space20"></div>
 
-
         <div class="row main-left">
-            @include('layout.menu')
+
+			@include('layout.menu')
 
             <div class="col-md-9">
 	            <div class="panel panel-default">            
@@ -22,11 +22,33 @@
 
 	            	<div class="panel-body">
 	            		<!-- item -->
-					   <p>
-					   	Lorem ipLorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.sum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-
-					   	
-					   </p>
+					<p>
+					Laravel Demo Project
+					</p>
+					<p>
+					Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
+					<p>
+						Laravel Demo Project
+					</p>
 
 					</div>
 	            </div>

@@ -33,9 +33,9 @@
             <hr>
 
             <!-- Blog Comments -->
-            @if (session('thongbao'))
+            @if (session('notification'))
             <div class="alert alert-success">
-                {{session('thongbao')}}
+                {{session('notification')}}
             </div>
             @endif
              <!-- Comments Form -->

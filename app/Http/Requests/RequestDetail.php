@@ -23,13 +23,26 @@ class RequestDetail extends FormRequest
      */
     public function rules()
     {
-        return [
-            'TheLoai'=>'required',
-            'LoaiTin'=>'required',
-            'TieuDe'=>'required|unique:tintuc,TieuDe',
-            'TomTat'=>'required',
-            'NoiDung'=>'required'
-        ];
+        if(isset($this->id)){
+            $rule = [
+                'TheLoai'=>'required',
+                'LoaiTin'=>'required',
+                'TieuDe'=>'required|unique:tintuc,TieuDe,'.$this->id.',_id',
+                'TomTat'=>'required',
+                'NoiDung'=>'required'
+            ];
+        }
+        else{
+            $rule = [
+                'TheLoai'=>'required',
+                'LoaiTin'=>'required',
+                'TieuDe'=>'required|unique:tintuc,TieuDe',
+                'TomTat'=>'required',
+                'NoiDung'=>'required'
+            ];
+        }
+        return $rule;
+        
     }
 
     public function messages(){

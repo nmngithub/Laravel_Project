@@ -25,7 +25,6 @@ class KindOfNewsController extends Controller
         $KindOfNews->TheLoai = $req->TheLoai;
         $KindOfNews->Ten = $req->Ten;
         $KindOfNews->TenKhongDau = changeTitle($req->Ten);
-        dd($KindOfNews);
         $KindOfNews->save();
 
         return redirect()->back()->with('notification','Đã thêm thành công!');
@@ -52,7 +51,7 @@ class KindOfNewsController extends Controller
     public function getDelete($id) {
 
     	$KindOfNews = KindOfNews::find($id);
-        $Detail = Detail::where('loaitin',$id);
+        $Detail = Detail::where('LoaiTin',$KindOfNews->Ten);
         $Detail->delete();
     	$KindOfNews->delete();
     	return redirect()->back()->with('notification','Đã xóa thành công!');

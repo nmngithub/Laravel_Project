@@ -23,11 +23,21 @@ class RequestSlide extends FormRequest
      */
     public function rules()
     {
-        return [
-            'Ten'=>'required|unique:Slide,Ten',
-            'NoiDung'=>'required',
-            'Link'=>'required'
-        ];
+        if(isset($this->id)){
+            return [
+                'Ten'=>'required|unique:Slide,Ten,'.$this->id,'_id',
+                'NoiDung'=>'required',
+                'Link'=>'required'
+            ];
+        }
+        else{
+            return [
+                'Ten'=>'required|unique:Slide,Ten',
+                'NoiDung'=>'required',
+                'Link'=>'required'
+            ];
+        }
+        
     }
 
     public function messages()

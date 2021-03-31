@@ -23,12 +23,21 @@ class RequestUsers extends FormRequest
      */
     public function rules()
     {
-        return [
-            'Ten'=>'required|min:3|max:100',
-            'Email'=>'required|email|min:6|max:30',
-            'password'=>'required|min:6|max:12',
-            'passwordAgain'=>'required|same:password|min:6|max:12',
-        ];
+       if(isset($this->id)){
+            return [
+                'Ten'=>'required|min:3|max:100',
+                'Email'=>'required|email|min:6|max:30|unique:users,email,'.$this->id,'_id',
+                'password'=>'required|min:6|max:12',
+                'passwordAgain'=>'required|same:password|min:6|max:12',
+            ];
+       }else{
+            return [
+                'Ten'=>'required|min:3|max:100',
+                'Email'=>'required|email|min:6|max:30|unique:users,email',
+                'password'=>'required|min:6|max:12',
+                'passwordAgain'=>'required|same:password|min:6|max:12',
+            ];
+       }
     }
 
     public function messages()
@@ -42,6 +51,7 @@ class RequestUsers extends FormRequest
             'Email.email'=>'Bạn chưa nhập đúng định dạng Email!',
             'Email.min'=>'Email phải từ 6 đến 30 ký tự!',
             'Email.max'=>'Email phải từ 6 đến 30 ký tự!',
+            'Email.unique'=>'Email đã tồn tại!',
 
             'password.required'=>'Bạn chưa nhập Password!',
             'password.email'=>'Bạn chưa nhập đúng định dạng Password!',

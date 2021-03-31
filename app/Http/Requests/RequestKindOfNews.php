@@ -27,6 +27,20 @@ class RequestKindOfNews extends FormRequest
             'TheLoai'=>'required',
             'Ten'=> 'required|unique:loaitin,Ten',
         ];
+
+        if(isset($this->id)){
+            $rule = [
+                'TheLoai'=>'required',
+                'Ten'=> 'required|unique:loaitin,Ten,'.$this->id.',_id',
+            ];
+        }
+        else{
+            $rule = [
+                'TheLoai'=>'required',
+                'Ten'=> 'required|unique:loaitin,Ten',
+            ];
+        }
+        return $rule;
     }
 
     public function messages(){

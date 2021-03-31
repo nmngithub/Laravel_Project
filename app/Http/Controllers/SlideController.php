@@ -77,7 +77,7 @@ class SlideController extends Controller
 
             $slide->Hinh = $Hinh;
         }
-     
+       
         $slide->save();
 
         return redirect()->back()->with('notification','Đã sửa Thành Công!');

@@ -31,8 +31,8 @@ Route::get('/', function () {
 
 Route::get('admin/login',[UsersController::class, 'getLoginAdmin']);
 Route::post('admin/login',[UsersController::class, 'postLoginAdmin']);
-Route::get('admin/logout',[UsersController::class, 'getLogoutAdmin']);
 
+Route::get('admin/logout',[UsersController::class, 'getLogoutAdmin']);
 
 Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
@@ -47,6 +47,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
         Route::get('delete/{id}', [CategoryController::class, 'getDelete']);
     });
+
     Route::group(['prefix'=>'kindofnews'], function(){
         Route::get('list',[KindOfNewsController::class, 'getList']);
 
@@ -58,6 +59,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
         Route::get('delete/{id}', [KindOfNewsController::class, 'getDelete']);
     });
+
     Route::group(['prefix'=>'detail'], function(){
         Route::get('list',[DetailController::class, 'getList']);
 
@@ -98,22 +100,35 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminlogin'], function(){
 
         Route::get('delete/{id}', [UsersController::class, 'getDelete']);
     });
-    
-
 });
 
-Route::get('trangchu', [PagesController::class, 'trangchu'])->middleware('login');
-Route::get('contact', [PagesController::class, 'contact'])->middleware('login');
-Route::get('about', [PagesController::class, 'about'])->middleware('login');
-Route::get('register', [PagesController::class, 'getRegister']);
-Route::post('register', [PagesController::class, 'postRegister']);  
-Route::get('kindofnews/{Ten}', [PagesController::class, 'kindofnews'])->middleware('login');
-Route::get('detail/{_id}', [PagesController::class, 'detail'])->middleware('login');
 Route::get('login',[PagesController::class, 'getLogin']);
 Route::post('login',[PagesController::class, 'postLogin']);
+
+Route::get('register', [PagesController::class, 'getRegister']);
+Route::post('register', [PagesController::class, 'postRegister']); 
+
+Route::group(['middleware'=>'login'], function(){
+    Route::get('trangchu', [PagesController::class, 'trangchu']);
+
+    Route::get('about', [PagesController::class, 'about']);
+    
+    Route::get('contact', [PagesController::class, 'contact']);
+
+    Route::get('kindofnews/{Ten}', [PagesController::class, 'kindofnews']);
+
+    Route::get('detail/{id}', [PagesController::class, 'detail']);
+
+    Route::post('comment/{id}',[PagesController::class, 'comment']);
+
+    Route::get('account',[PagesController::class, 'getEditAccount']);
+    Route::post('account',[PagesController::class, 'postEditAccount']);
+
+    Route::get('search',[PagesController::class, 'search']);
+});
+
+
 Route::get('logout',[PagesController::class, 'logout']);
-Route::post('comment/{_id}',[PagesController::class, 'comment'])->middleware('login');
-Route::get('account',[PagesController::class, 'getAccount'])->middleware('login');
-Route::post('account',[PagesController::class, 'postAccount']);
-Route::get('search',[PagesController::class, 'search']);
+
+
 

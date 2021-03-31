@@ -23,7 +23,7 @@ class AdminLoginMiddleware
                 return $next($request);
             }
             else{
-                return redirect('admin/login')->with('thongbao', 'Tài khoản không phải admin!');
+                return redirect('admin/login')->with('notification', 'Tài khoản không phải admin!');
             }
         }
         else{

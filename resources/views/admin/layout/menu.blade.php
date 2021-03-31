@@ -13,7 +13,7 @@
                 <!-- /input-group -->
             </li>
             <li>
-                <a href="admin/theloai/danhsach"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="admin/category/list"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>Thể Loại<span class="fa arrow"></span></a>

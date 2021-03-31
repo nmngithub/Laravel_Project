@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RequestCategory;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\KindOfNews;
+use App\Models\Detail;
 
 class CategoryController extends Controller
 {
@@ -19,8 +21,10 @@ class CategoryController extends Controller
 
     public function postAdd(RequestCategory $req){
         $Category = new Category;
+
         $Category->Ten = $req->Ten;
         $Category->TenKhongDau = changeTitle($req->Ten);
+
         $Category->save();
 
         return redirect()->back()->with('notification', 'Đã thêm thành công!');
@@ -33,8 +37,10 @@ class CategoryController extends Controller
 
     public function postEdit(RequestCategory $req, $id){
         $Category = Category::find($id);
+     
         $Category->Ten = $req->Ten;
         $Category->TenKhongDau = changeTitle($req->Ten);
+        
         $Category->save();
 
         return redirect()->back()->with('notification','Đã sửa thành công!');
@@ -42,6 +48,12 @@ class CategoryController extends Controller
 
     public function getDelete($id){
         $Category = Category::find($id);
+
+        $KindOfNews = KindOfNews::where('TheLoai',$Category->Ten);
+        $Detail = Detail::where('TheLoai', $Category->Ten);
+
+        $Detail->delete();
+        $KindOfNews->delete();
         $Category->delete();
 
         return redirect()->back()->with('notification', 'Đã xóa thành công!');

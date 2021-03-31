@@ -22,16 +22,25 @@ class RequestCategory extends FormRequest
      * @return array
      */
     public function rules()
-    {    
-        return [
-            'Ten'=>'required|unique:theloai,Ten',
-        ];
+    {       
+        if(isset($this->id)){
+            $rule = [
+                'Ten'=>'required|unique:theloai,Ten,'.$this->id.',_id',
+            ];
+        }
+        else{
+            $rule = [
+                'Ten'=>'required|unique:theloai,Ten',
+            ];
+        }
+        return $rule;
+        
     }
 
     public function messages()
     {
         return [
-            'Ten.required'=>'Bạn chưa nhập tên!',
+            'Ten.required'=>'Bạn chưa nhập tên thể loại!',
             'Ten.unique'=>'Tên thể loại đã tồn tại!',
         ];
     }

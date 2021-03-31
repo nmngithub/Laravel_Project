@@ -19,9 +19,9 @@
                     </div>
                     @endif
 
-                    @if (session('thongbao'))
+                    @if (session('notification'))
                         <div class="alert alert-danger">
-                            {{session('thongbao')}}
+                            {{session('notification')}}
                         </div>
                     @endif
 				    	<form action="login" method="POST">
