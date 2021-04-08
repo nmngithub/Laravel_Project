@@ -25,7 +25,7 @@
                     @endif
                 >
                 <?php $i++; ?>
-                    <img class="slide-image" src="upload/slide/{{$sl->Hinh}}" alt="">
+                    <img class="slide-image" style="height: 386px;" src="upload/slide/{{$sl->Hinh}}" alt="">
                 </div>
                
                 @endforeach

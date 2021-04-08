@@ -47,7 +47,7 @@ class DetailController extends Controller
         } else{
             $Detail->Hinh ="";
         }
-        $Detail->NoiBat = $req->NoiBat;
+        $Detail->NoiBat = (int)$req->NoiBat;
         $Detail->TheLoai = $req->TheLoai;
         $Detail->LoaiTin = $req->LoaiTin;
         $Detail->save();
@@ -90,6 +90,7 @@ class DetailController extends Controller
             
             $Detail->Hinh = $Hinh;
         }
+        $Detail->NoiBat = (int)$req->NoiBat;
         $Detail->save();
 
         return redirect()->back()->with('notification','Đã sửa Thành Công!');

@@ -11,13 +11,6 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                @if (count($errors)>0)
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $err)
-                            {{$err}} <br>
-                        @endforeach
-                    </div>
-                @endif
 
                 @if (session('notification'))
                     <div class="alert alert-success">
@@ -30,7 +23,6 @@
                     <div class="form-group">
                         <label>Thể Loại</label>
                         <select class="form-control" name="TheLoai">
-                          
                             @foreach ($Category as $item)
                                 <option
                                 @if ($KindOfNews->TheLoai == $item->Ten)
@@ -39,10 +31,16 @@
                                  value="{{$item->Ten}}">{{$item->Ten}}</option>
                             @endforeach
                         </select>
+                        @error('TheLoai')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Tên Loại Tin</label>
                         <input class="form-control" name="Ten" placeholder="Nhập tên loại tin" value="{{$KindOfNews->Ten}}" />
+                    @error('Ten')
+                        <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                    @enderror
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>
                 <form>

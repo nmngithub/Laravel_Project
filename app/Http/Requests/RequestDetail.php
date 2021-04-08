@@ -29,7 +29,8 @@ class RequestDetail extends FormRequest
                 'LoaiTin'=>'required',
                 'TieuDe'=>'required|unique:tintuc,TieuDe,'.$this->id.',_id',
                 'TomTat'=>'required',
-                'NoiDung'=>'required'
+                'NoiDung'=>'required',
+                
             ];
         }
         else{

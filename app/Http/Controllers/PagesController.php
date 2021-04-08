@@ -18,10 +18,10 @@ class PagesController extends Controller
 {
     
     public function trangchu(){
-        $Category = Category::all()->sortByDesc('created_at');
+        $Category = Category::all()->sortBy('Ten');
         $slide = Slide::all();
         $Detail = Detail::all()->sortByDesc('created_at');
-        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->sortBy('Ten')->toArray();
 
         $KON = [];
   
@@ -34,7 +34,7 @@ class PagesController extends Controller
     }
 
     public function about(){
-        $Category = Category::all()->sortByDesc('created_at');
+        $Category = Category::all()->sortBy('Ten');
         $slide = Slide::all();
        
         $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
@@ -48,7 +48,7 @@ class PagesController extends Controller
         return view('pages.about',['slide'=>$slide,'Category'=>$Category,'KON'=>$KON]);
     }
     public function contact(){
-        $Category = Category::all()->sortByDesc('created_at');
+        $Category = Category::all()->sortBy('Ten');
         $slide = Slide::all();
        
         $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
@@ -64,7 +64,7 @@ class PagesController extends Controller
 
     public function kindofnews($Ten){
         $KindOfNews1 = KindOfNews::where('Ten',$Ten)->get();
-        $Detail = Detail::where('LoaiTin',$Ten)->paginate(3);
+        $Detail = Detail::where('LoaiTin',$Ten)->orderBy('created_at', 'desc')->paginate(3);
         $Category = Category::all();
         $KindOfNews2 = KindOfNews::select('TheLoai','Ten')->get()->toArray();
 
@@ -79,7 +79,7 @@ class PagesController extends Controller
 
     public function detail($id){
         $Detail = Detail::find($id);
-        $tinnoibat = Detail::where('NoiBat', 1)->get()->sortByDesc('created_at')->take(3); 
+        $tinnoibat = Detail::where('NoiBat', 1)->orderBy('created_at', 'DESC')->limit(3)->get(); 
         $tinlienquan = Detail::where('LoaiTin',$Detail->LoaiTin)->where('_id','<>',$id)->get()->sortByDesc('created_at')->take(3);
 
         //Comment, Users
@@ -88,7 +88,7 @@ class PagesController extends Controller
         $showinfo = [];
         foreach($cm as $key1 => $value1){
             foreach($users as $key2 => $value2){
-                if($value1['User_id'] == $value2['id']){
+                if($value1['User_id'] == $value2['_id']){
                     $value1['User_Name'] = $value2['name'];
                     $showinfo[$key1] = $value1;
                 }
@@ -168,7 +168,7 @@ class PagesController extends Controller
 
 
     public function search(Request $req){
-        $Category = Category::all()->sortByDesc('created_at');
+        $Category = Category::all()->sortBy('Ten');
     
         $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
 
@@ -178,9 +178,8 @@ class PagesController extends Controller
         {
             $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
         }
-
         $keywords = $req->keywords;
-        $Detail = Detail::where('Tieude','like',"%$keywords%")->orWhere('TomTat','like',"%$keywords%")->orWhere('NoiDung','like',"%$keywords%")->paginate(5);
+        $Detail = Detail::where('Tieude','like',"%$keywords%")->orWhere('TomTat','like',"%$keywords%")->orWhere('NoiDung','like',"%$keywords%")->orderBy('created_at', 'desc')->paginate(5);
         
         return view('pages.search',['Detail'=>$Detail, 'Category'=>$Category, 'KON'=>$KON, 'keywords'=>$keywords]);
     }

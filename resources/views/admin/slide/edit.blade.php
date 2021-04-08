@@ -12,15 +12,6 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-
-                @if (count($errors)>0)
-                    @foreach ($errors->all() as $err)
-                        <div class="alert alert-danger">
-                            {{$err}} <br>
-                        </div>
-                    @endforeach
-                @endif
-
                 @if (session('notification'))
                     <div class="alert alert-success">
                         {{session('notification')}}
@@ -31,6 +22,9 @@
                     <div class="form-group">
                     <label>Tên Slide</label>
                         <input class="form-control" name="Ten" value="{{$slide->Ten}}" />
+                        @error('Ten')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Hình Ảnh</label>
@@ -40,10 +34,16 @@
                     <div class="form-group">
                         <label>Nội Dung</label>
                         <input class="form-control" name="NoiDung" value="{{$slide->NoiDung}}" />
+                        @error('NoiDung')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Link</label>
                         <input class="form-control" name="Link" value="{{$slide->link}}" />
+                        @error('Link')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>
                     <button type="reset" class="btn btn-default">Reset</button>

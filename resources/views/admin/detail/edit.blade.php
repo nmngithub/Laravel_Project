@@ -13,13 +13,6 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                @if (count($errors)>0)
-                    @foreach ($errors->all() as $err)
-                        <div class="alert alert-danger">
-                            {{$err}} <br>
-                        </div>
-                    @endforeach
-                @endif
 
                 @if (session('notification'))
                     <div class="alert alert-success">
@@ -34,42 +27,59 @@
                         <select class="form-control" name="TheLoai">
                             @foreach ($Category as $item)
                                 <option
-                                @if ($Detail->TheLoai == $item->Ten)
-                                    {{"Selected"}}
-                                @endif
-                                 value="{{$item->Ten}}">{{$item->Ten}}</option>
+                                    @if ($Detail->TheLoai == $item->Ten)
+                                        {{"Selected"}}
+                                    @endif
+                                        value="{{$item->Ten}}">{{$item->Ten}}
+                                </option>
                             @endforeach
                         </select>
+                        @error('TheLoai')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Loại Tin</label>
                         <select class="form-control" name="LoaiTin">
                             @foreach ($KindOfNews as $item)
                                 <option
-                                @if ($Detail->LoaiTin == $item->Ten)
-                                    {{"Selected"}}
-                                @endif
-                                 value="{{$item->Ten}}">{{$item->Ten}}</option>
+                                    @if ($Detail->LoaiTin == $item->Ten)
+                                        {{"Selected"}}
+                                    @endif
+                                        value="{{$item->Ten}}">{{$item->Ten}}
+                                </option>
                             @endforeach
                         </select>
+                        @error('LoaiTin')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Tiêu Đề</label>
                         <textarea name="TieuDe" class="form-control">
                             {{$Detail->TieuDe}}
                         </textarea>
+                        @error('TieuDe')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Tóm Tắt</label>
-                        <textarea name="TomTat" class="form-control" rows="3">
+                        <textarea name="TomTat" class="form-control" rows="3" >
                             {{$Detail->TomTat}}
                         </textarea>
+                        @error('TomTat')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Nội Dung</label>
-                        <textarea name="NoiDung" class="form-control"  rows="5">
+                        <textarea name="NoiDung" class="form-control"  rows="5" >
                             {{$Detail->NoiDung}}
                         </textarea>
+                        @error('NoiDung')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Hình Ảnh</label>

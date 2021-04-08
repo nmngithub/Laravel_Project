@@ -25,7 +25,7 @@ class RequestSlide extends FormRequest
     {
         if(isset($this->id)){
             return [
-                'Ten'=>'required|unique:Slide,Ten,'.$this->id,'_id',
+                'Ten'=>'required|unique:Slide,Ten,'.$this->id.',_id',
                 'NoiDung'=>'required',
                 'Link'=>'required'
             ];

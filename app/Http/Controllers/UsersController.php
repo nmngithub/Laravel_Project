@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\RequestUsers;
+use App\Http\Requests\RequestAdminLogin;
 use App\Models\Users;
 use App\Models\Comment;
 
@@ -61,20 +62,8 @@ class UsersController extends Controller
         return view('admin.login');
     }
 
-    public function postLoginAdmin(Request $req){
-        $this->validate($req,
-        [
-            'email'=>'required',
-            'password'=>'required'
-        ],
-        [
-            'email.required'=>'Bạn chưa nhập Email!',
-            'password.required'=>'Bạn chưa nhập Password!'
-        ]);
+    public function postLoginAdmin(RequestAdminLogin $req){
 
-        echo $req->email;
-        echo $req->password;
-        
         if(Auth::attempt(['email'=>$req->email, 'password'=>$req->password])){
             return redirect('admin/category/list');
         }

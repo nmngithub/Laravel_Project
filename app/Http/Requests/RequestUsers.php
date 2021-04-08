@@ -26,7 +26,7 @@ class RequestUsers extends FormRequest
        if(isset($this->id)){
             return [
                 'Ten'=>'required|min:3|max:100',
-                'Email'=>'required|email|min:6|max:30|unique:users,email,'.$this->id,'_id',
+                'Email'=>'required|email|min:6|max:30|unique:users,email,'.$this->id.',_id',
                 'password'=>'required|min:6|max:12',
                 'passwordAgain'=>'required|same:password|min:6|max:12',
             ];

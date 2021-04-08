@@ -12,15 +12,6 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                @if (count($errors)>0)
-
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $err)
-                        {{$err}} <br>
-                    @endforeach
-                </div>
-                    
-                @endif
 
               @if (session('notification'))
                   <div class="alert alert-success">
@@ -32,6 +23,9 @@
                     <div class="form-group">
                         <label>Tên Thể Loại</label>
                         <input class="form-control" name="Ten" placeholder="Điền tên thể loại" value="{{$Category->Ten}}" />
+                    @error('Ten')
+                        <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                    @enderror
                     </div>
                     
                     

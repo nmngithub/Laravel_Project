@@ -23,51 +23,52 @@
                 <div class="panel-body">
                     <!-- item -->
                 @foreach ($Category as $item1)
-                    <div class="row-item row">
-                        <h3>
-                            <a href="#">{{$item1->Ten}}</a> | 
-                            @foreach ($KON[$item1->Ten] as $item2)
-                            <small><a href="kindofnews/{{$item2}}"><i>{{$item2}}</i></a>/</small>
-                            @endforeach	
-                        </h3>
+                    @if(isset($KON[$item1->Ten]))
+                        <div class="row-item row">
+                            <h3>
+                                <a href="#">{{$item1->Ten}}</a> |
+                                    @foreach ($KON[$item1->Ten] as $item2)
+                                    <small><a href="kindofnews/{{$item2}}"><i>{{$item2}}</i></a>/</small>
+                                    @endforeach	
+                            </h3>
+                            
+                            <?php 
+                                    $data = $Detail->where('TheLoai',$item1->Ten)->sortByDesc('_id')->take(4);
+                                    $oneNews = $data->shift();
+                            ?>
 
-                        <?php 
-                                $data = $Detail->where('TheLoai',$item1->Ten)->sortByDesc('_id')->take(4);
-                                $oneNews = $data->shift();
-                        ?>
+                
+                            <div class="col-md-8 border-right">
+                                @if(isset($oneNews))
+                                <div class="col-md-5">
+                                    <a href="detail/{{$oneNews['_id']}}">
+                                        <img class="img-responsive" src="upload/tintuc/{{$oneNews['Hinh']}}" alt="">
+                                    </a>
+                                </div>
 
-               
-                        <div class="col-md-8 border-right">
-                            @if(isset($oneNews))
-                            <div class="col-md-5">
-                                <a href="detail/{{$oneNews['_id']}}">
-                                    <img class="img-responsive" src="upload/tintuc/{{$oneNews['Hinh']}}" alt="">
+                                <div class="col-md-7">
+                                    <h3>{{$oneNews['TieuDe']}}</h3>
+                                    <p>{{$oneNews['TomTat']}}</p>
+                                    <a class="btn btn-primary" href="detail/{{$oneNews['_id']}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
+                                </div>
+                                @endif
+                            </div>
+                            
+
+                            <div class="col-md-4">
+                                @foreach ($data->sortByDesc('created_at') as $item)
+                                <a href="detail/{{$item->_id}}">
+                                    <h4>
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        {{$item->TieuDe}}
+                                    </h4>
                                 </a>
+                                @endforeach
                             </div>
-
-                            <div class="col-md-7">
-                                <h3>{{$oneNews['TieuDe']}}</h3>
-                                <p>{{$oneNews['TomTat']}}</p>
-                                <a class="btn btn-primary" href="detail/{{$oneNews['_id']}}">Xem Thêm<span class="glyphicon glyphicon-chevron-right"></span></a>
-                            </div>
-                            @endif
+                            
+                            <div class="break"></div>
                         </div>
-                        
-                        {{-- @dump($data) --}}
-
-                        <div class="col-md-4">
-                            @foreach ($data as $item)
-                            <a href="detail/{{$item->_id}}">
-                                <h4>
-                                    <span class="glyphicon glyphicon-list-alt"></span>
-                                    {{$item->TieuDe}}
-                                </h4>
-                            </a>
-                            @endforeach
-                        </div>
-                        
-                        <div class="break"></div>
-                    </div>
+                    @endif
                 @endforeach
                     <!-- end item -->
                 </div>

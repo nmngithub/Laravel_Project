@@ -12,13 +12,6 @@
             </div>
             <!-- /.col-lg-12 -->
             <div class="col-lg-7" style="padding-bottom:120px">
-                @if (count($errors)>0)
-                    <div class="alert alert-danger">
-                    @foreach ($errors->all() as $err)
-                            {{$err}} <br>
-                    @endforeach
-                    </div>
-                @endif
 
                 @if (session('notification'))
                     <div class="alert alert-success">
@@ -30,18 +23,30 @@
                     <div class="form-group">
                         <label>Tên Người Dùng</label>
                         <input class="form-control" name="Ten" value="{{$users->name}}" />
+                        @error('Ten')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" class="form-control" name="Email" value="{{$users->email}}" />
+                        @error('Email')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>PassWord</label>
                         <input type="password" class="form-control" name="password" placeholder="Nhập PassWord" />
+                        @error('password')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Nhập Lại PassWord</label>
                         <input type="password" class="form-control" name="passwordAgain" placeholder="Nhập Lại PassWord" />
+                        @error('passwordAgain')
+                            <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Quyền Người Dùng</label>

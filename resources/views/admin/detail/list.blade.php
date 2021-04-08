@@ -22,6 +22,7 @@
                         <th>ID</th>
                         <th>Tiêu Đề</th>
                         <th>Tóm Tắt</th>
+                        <th>Nội Dung</th>
                         <th>Thể Loại</th>
                         <th>Loại Tin</th>
                         <th>Nổi Bật</th>
@@ -39,6 +40,7 @@
                                 <img src="upload/tintuc/{{$item->Hinh}}" width="100px" alt="">
                             </td>
                             <td>{{$item->TomTat}}</td>
+                            <td>{{$item->NoiDung}}</td>
                             <td>{{$item->TheLoai}}</td>
                             <td>{{$item->LoaiTin}}</td>
                             <td>
