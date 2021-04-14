@@ -78,16 +78,16 @@
                 <div class="panel-body">
                     <!-- item -->
                     @foreach ($tinlienquan->sortByDesc('created_at') as $item)
-                    <div class="row" style="margin-top: 10px;text-align: center">
+                    <div class="row" style="margin-top: 10px;text-align: left">
                         <div class="col-md-5">
                             <a href="detail/{{$item->_id}}">
                                 <img class="img-responsive" src="upload/tintuc/{{$item->Hinh}}" alt="">
                             </a>
                         </div>
-                        <div class="col-md-7"  style="height: 62px; padding:0">
-                            <a href="detail/{{$item->_id}}"><h6 style="margin: 0"><b>{{$item->TieuDe}}</b></a>
+                        <div class="col-md-7"  style="height: 70px; padding:0">
+                            <a href="detail/{{$item->_id}}"><h6 style="margin-top: 0;margin-right: 10px;"><b>{{$item->TieuDe}}</b></a>
                         </div>
-                        <p>{{$item->TomTat}}</p>
+                        <p style="padding: 0px 15px;">{{$item->TomTat}}</p>
                         <div class="break"></div>
                     </div>
                     @endforeach
@@ -101,16 +101,16 @@
                 <div class="panel-body">
                     @foreach ($tinnoibat as $item)
                     <!-- item -->
-                    <div class="row" style="margin-top: 10px; text-align: center">
+                    <div class="row" style="margin-top: 10px; text-align: left">
                         <div class="col-md-5">
                             <a href="detail/{{$item->_id}}">
                                 <img class="img-responsive" src="upload/tintuc/{{$item->Hinh}}" alt="">
                             </a>
                         </div>
                         <div class="col-md-7" style="height: 62px; padding:0">
-                            <a href="detail/{{$item->_id}}"><h6 style="margin: 0"><b>{{$item->TieuDe}}</b></h6></a>
+                            <a href="detail/{{$item->_id}}"><h6 style="margin-top: 0;margin-right: 10px;"><b>{{$item->TieuDe}}</b></h6></a>
                         </div>
-                        <p>{{$item->TomTat}}</p>
+                        <p style="padding: 0px 15px;">{{$item->TomTat}}</p>
                         <div class="break"></div>
                     </div>
                     <!-- end item -->

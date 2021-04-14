@@ -22,16 +22,16 @@
                     @csrf
                     <div class="form-group">
                         <label>Thể Loại</label>
-                        <select class="form-control" name="TheLoai">
+                        <select class="form-control" name="IdTheLoai">
                             @foreach ($Category as $item)
                                 <option
-                                @if ($KindOfNews->TheLoai == $item->Ten)
+                                @if ($KindOfNews->IdTheLoai == $item->id)
                                     {{"Selected"}}
                                 @endif
-                                 value="{{$item->Ten}}">{{$item->Ten}}</option>
+                                 value="{{$item->id}}">{{$item->Ten}}</option>
                             @endforeach
                         </select>
-                        @error('TheLoai')
+                        @error('IdTheLoai')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror
                     </div>

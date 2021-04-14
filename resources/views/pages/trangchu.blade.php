@@ -22,18 +22,18 @@
 
                 <div class="panel-body">
                     <!-- item -->
-                @foreach ($Category as $item1)
-                    @if(isset($KON[$item1->Ten]))
+                @foreach ($Category as $itemCat)
+                    @if(isset($KON[$itemCat->id]))
                         <div class="row-item row">
                             <h3>
-                                <a href="#">{{$item1->Ten}}</a> |
-                                    @foreach ($KON[$item1->Ten] as $item2)
-                                    <small><a href="kindofnews/{{$item2}}"><i>{{$item2}}</i></a>/</small>
+                                <a href="/">{{$itemCat->Ten}}</a> |
+                                    @foreach ($KON[$itemCat->id] as $itemKON)
+                                    <small><a href="kindofnews/{{$itemKON}}"><i>{{$itemKON}}</i></a>/</small>
                                     @endforeach	
                             </h3>
                             
                             <?php 
-                                    $data = $Detail->where('TheLoai',$item1->Ten)->sortByDesc('_id')->take(4);
+                                    $data = $Detail->where('IdTheLoai',$itemCat->id)->sortByDesc('created_at')->take(4);
                                     $oneNews = $data->shift();
                             ?>
 
@@ -56,11 +56,11 @@
                             
 
                             <div class="col-md-4">
-                                @foreach ($data->sortByDesc('created_at') as $item)
-                                <a href="detail/{{$item->_id}}">
+                                @foreach ($data->sortByDesc('created_at') as $itemData)
+                                <a href="detail/{{$itemData->_id}}">
                                     <h4>
                                         <span class="glyphicon glyphicon-list-alt"></span>
-                                        {{$item->TieuDe}}
+                                        {{$itemData->TieuDe}}
                                     </h4>
                                 </a>
                                 @endforeach

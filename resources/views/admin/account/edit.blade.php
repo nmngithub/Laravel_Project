@@ -36,14 +36,14 @@
                     </div>
                     <div class="form-group">
                         <label>PassWord</label>
-                        <input type="password" class="form-control" name="password" placeholder="Nhập PassWord" />
+                        <input type="password" class="form-control" name="password" placeholder="Nhập PassWord"" />
                         @error('password')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label>Nhập Lại PassWord</label>
-                        <input type="password" class="form-control" name="passwordAgain" placeholder="Nhập Lại PassWord" />
+                        <input type="password" class="form-control" name="passwordAgain" placeholder="Nhập Lại PassWord"/>
                         @error('passwordAgain')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror

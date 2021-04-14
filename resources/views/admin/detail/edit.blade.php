@@ -24,33 +24,33 @@
                     @csrf
                     <div class="form-group">
                         <label>Thể Loại</label>
-                        <select class="form-control" name="TheLoai">
+                        <select class="form-control" name="IdTheLoai">
                             @foreach ($Category as $item)
                                 <option
-                                    @if ($Detail->TheLoai == $item->Ten)
+                                    @if ($Detail->IdTheLoai == $item->id)
                                         {{"Selected"}}
                                     @endif
-                                        value="{{$item->Ten}}">{{$item->Ten}}
+                                        value="{{$item->id}}">{{$item->Ten}}
                                 </option>
                             @endforeach
                         </select>
-                        @error('TheLoai')
+                        @error('IdTheLoai')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label>Loại Tin</label>
-                        <select class="form-control" name="LoaiTin">
+                        <select class="form-control" name="IdLoaiTin">
                             @foreach ($KindOfNews as $item)
                                 <option
-                                    @if ($Detail->LoaiTin == $item->Ten)
+                                    @if ($Detail->IdLoaiTin == $item->id)
                                         {{"Selected"}}
                                     @endif
-                                        value="{{$item->Ten}}">{{$item->Ten}}
+                                        value="{{$item->id}}">{{$item->Ten}}
                                 </option>
                             @endforeach
                         </select>
-                        @error('LoaiTin')
+                        @error('IdLoaiTin')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror
                     </div>

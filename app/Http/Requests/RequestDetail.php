@@ -25,8 +25,8 @@ class RequestDetail extends FormRequest
     {
         if(isset($this->id)){
             $rule = [
-                'TheLoai'=>'required',
-                'LoaiTin'=>'required',
+                'IdTheLoai'=>'required',
+                'IdLoaiTin'=>'required',
                 'TieuDe'=>'required|unique:tintuc,TieuDe,'.$this->id.',_id',
                 'TomTat'=>'required',
                 'NoiDung'=>'required',
@@ -35,8 +35,8 @@ class RequestDetail extends FormRequest
         }
         else{
             $rule = [
-                'TheLoai'=>'required',
-                'LoaiTin'=>'required',
+                'IdTheLoai'=>'required',
+                'IdLoaiTin'=>'required',
                 'TieuDe'=>'required|unique:tintuc,TieuDe',
                 'TomTat'=>'required',
                 'NoiDung'=>'required'
@@ -48,9 +48,9 @@ class RequestDetail extends FormRequest
 
     public function messages(){
         return [
-            'TheLoai.required'=>'Bạn chưa chọn thể loại!',
+            'IdTheLoai.required'=>'Bạn chưa chọn thể loại!',
 
-            'LoaiTin.required'=>'Bạn chưa chọn loại tin!',
+            'IdLoaiTin.required'=>'Bạn chưa chọn loại tin!',
 
             'TieuDe.required'=>'Bạn chưa nhập Tiêu đề!',
             'TieuDe.unique'=>'Tiêu đề đã tồn tại!',

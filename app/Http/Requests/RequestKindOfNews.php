@@ -25,13 +25,13 @@ class RequestKindOfNews extends FormRequest
     {
         if(isset($this->id)){
             $rule = [
-                'TheLoai'=>'required',
+                'IdTheLoai'=>'required',
                 'Ten'=> 'required|unique:loaitin,Ten,'.$this->id.',_id',
             ];
         }
         else{
             $rule = [
-                'TheLoai'=>'required',
+                'IdTheLoai'=>'required',
                 'Ten'=> 'required|unique:loaitin,Ten',
             ];
         }
@@ -40,7 +40,7 @@ class RequestKindOfNews extends FormRequest
 
     public function messages(){
         return [
-            'TheLoai.required'=>'Bạn chưa chọn tên thể loại',
+            'IdTheLoai.required'=>'Bạn chưa chọn thể loại',
 
             'Ten.required'=>'Bạn chưa nhập tên loại tin!',
             'Ten.unique'=>'Tên loại tin đã tồn tại!',

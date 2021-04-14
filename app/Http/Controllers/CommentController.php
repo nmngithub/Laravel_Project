@@ -40,6 +40,6 @@ class CommentController extends Controller
         
         $comment->delete();
 
-        return redirect()->back()->with('thongbao', 'Đã Xóa Comment Thành Công!');
+        return redirect()->back()->with('notification', 'Đã Xóa Comment Thành Công!');
     }
 }

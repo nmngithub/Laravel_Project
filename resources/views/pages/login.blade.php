@@ -11,13 +11,6 @@
                 <div class="panel panel-default">
 				  	<div class="panel-heading">Đăng nhập</div>
 				  	<div class="panel-body">
-                    @if (count($errors)>0)
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $err)
-                            {{$err}} <br>
-                        @endforeach
-                    </div>
-                    @endif
 
                     @if (session('notification'))
                         <div class="alert alert-danger">
@@ -28,13 +21,18 @@
                             @csrf
 							<div>
 				    			<label>Email</label>
-							  	<input type="email" class="form-control" placeholder="Email" name="email" 
-							  	>
-							</div>
+							  	<input type="email" class="form-control" placeholder="Email" name="email" value="{{old('email')}}">
+                                @error('email')
+                                    <small class="text-danger text-uppercase alert">{{$message}}</small>
+                                @enderror
+                            </div>
 							<br>	
 							<div>
 				    			<label>Mật khẩu</label>
 							  	<input type="password" class="form-control" name="password">
+                                  @error('password')
+                                      <small class="text-danger text-uppercase alert">{{$message}}</small>
+                                  @enderror
 							</div>
 							<br>
 							<button type="submit" class="btn btn-default">Đăng nhập

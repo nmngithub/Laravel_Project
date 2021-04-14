@@ -32,7 +32,11 @@
                             <td>{{$stt}}</td>
                     <?php $stt++; ?>
                             <td>{{$item->Ten}}</td>
-                            <td>{{$item->TheLoai}}</td>
+                            @foreach ($Category as $item1)
+                            @if ($item->IdTheLoai == $item1->_id)
+                            <td>{{$item1->Ten}}</td>                
+                            @endif    
+                            @endforeach
                             <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/kindofnews/delete/{{$item->id}}">Delete</a></td>
                             <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/kindofnews/edit/{{$item->id}}">Edit</a></td>
                         </tr>

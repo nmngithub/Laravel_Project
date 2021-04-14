@@ -8,8 +8,8 @@
                 {{$item1->Ten}}
             </li>
             <ul>
-                @if(isset($KON[$item1->Ten]))
-                    @foreach ($KON[$item1->Ten] as $item2)
+                @if(isset($KON[$item1->id]))
+                    @foreach ($KON[$item1->id] as $item2)
                     <li class="list-group-item">
                         <a href="kindofnews/{{$item2}}">{{$item2}}</a>
                     </li>   

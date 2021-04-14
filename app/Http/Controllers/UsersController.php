@@ -22,9 +22,9 @@ class UsersController extends Controller
         $users = new Users;
         $users->name = $req->Ten;
         $users->email = $req->Email;
-        $users->quyen = $req->quyen;
-        $users->block = $req->block;
         $users->password = bcrypt($req->password); 
+        $users->quyen = (int)$req->quyen;
+        $users->block = (int)$req->block;
 
         $users->save();
 
@@ -41,8 +41,8 @@ class UsersController extends Controller
         $users->name = $req->Ten;
         $users->email = $req->Email;
         $users->password = bcrypt($req->password); 
-        $users->quyen = $req->quyen;
-        $users->block = $req->block;
+        $users->quyen = (int)$req->quyen;
+        $users->block = (int)$req->block;
 
         $users->save();
 

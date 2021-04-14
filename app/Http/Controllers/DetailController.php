@@ -14,8 +14,10 @@ use App\Models\Comment;
 class DetailController extends Controller
 {
     public function getList(){
+        $Category = Category::all();
+        $KindOfNews = KindOfNews::all();
         $Detail = Detail::all()->sortByDesc('created_at');
-        return view('admin.detail.list',['Detail'=>$Detail]);
+        return view('admin.detail.list',['Category'=>$Category,'KindOfNews'=>$KindOfNews,'Detail'=>$Detail]);
     }
 
     public function getAdd(){
@@ -39,7 +41,7 @@ class DetailController extends Controller
             }
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
-            while(file_exists('upload/tintuc'.$Hinh)){
+            while(file_exists('upload/tintuc/'.$name)){
                 $Hinh = Str::random(4)."_".$name;
             }
             $file->move('upload/tintuc',$Hinh);
@@ -48,8 +50,8 @@ class DetailController extends Controller
             $Detail->Hinh ="";
         }
         $Detail->NoiBat = (int)$req->NoiBat;
-        $Detail->TheLoai = $req->TheLoai;
-        $Detail->LoaiTin = $req->LoaiTin;
+        $Detail->IdTheLoai = $req->IdTheLoai;
+        $Detail->IdLoaiTin = $req->IdLoaiTin;
         $Detail->save();
 
         return redirect()->back()->with('notification','Đã thêm Thành Công!');
@@ -65,14 +67,10 @@ class DetailController extends Controller
     public function postEdit(RequestDetail $req, $id){
         $Detail = Detail::find($id);
 
-        $Detail->TheLoai = $req->TheLoai;
-        $Detail->LoaiTin = $req->LoaiTin;
         $Detail->TieuDe = $req->TieuDe;
-        $Detail->TieuDeKhongDau = changeTitle($req->TieuDeKhongDau);
-        $Detail->idLoaiTin = $req->LoaiTin;
+        $Detail->TieuDeKhongDau = changeTitle($req->TieuDe);
         $Detail->TomTat = $req->TomTat;
         $Detail->NoiDung = $req->NoiDung;
-
         if($req->hasFile('Hinh')){
             $file = $req->file('Hinh');
             $format = $file->getClientOriginalExtension();
@@ -81,8 +79,8 @@ class DetailController extends Controller
             }
             $name = $file->getClientOriginalName();
             $Hinh = Str::random(4)."_".$name;
-            while(file_exists('upload/tintuc'.$Hinh)){
-                unlink('upload/tintuc/'.$tintuc->Hinh);
+            while(file_exists('upload/tintuc/'.$name)){
+                unlink('upload/tintuc/'.$tintuc->name);
                 $Hinh = Str::random(4)."_".$name;
             }
             $file->move('upload/tintuc',$Hinh);
@@ -90,7 +88,10 @@ class DetailController extends Controller
             
             $Detail->Hinh = $Hinh;
         }
-        $Detail->NoiBat = (int)$req->NoiBat;
+        $Detail->NoiBat = (int) $req->NoiBat;
+        $Detail->IdTheLoai = $req->IdTheLoai;
+        $Detail->IdLoaiTin = $req->IdLoaiTin;
+        
         $Detail->save();
 
         return redirect()->back()->with('notification','Đã sửa Thành Công!');

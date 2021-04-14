@@ -22,9 +22,9 @@
                     @csrf
                     <div class="form-group">
                         <label>Thể Loại</label>
-                        <select class="form-control" name="TheLoai">
+                        <select class="form-control" name="IdTheLoai">
                            @foreach ($Category as $item)
-                            <option value="{{$item->Ten}}" @if (old('TheLoai') == $item->Ten) selected="selected" @endif>{{$item->Ten}}</option>
+                            <option value="{{$item->id}}" @if (old('IdTheLoai') == $item->id) selected="selected" @endif>{{$item->Ten}}</option>
                            @endforeach
                         </select>
                         @error('TheLoai')

@@ -23,23 +23,23 @@
                     @csrf
                     <div class="form-group">
                         <label>Thể Loại</label>
-                        <select class="form-control" name="TheLoai" id="TheLoai">
+                        <select class="form-control" name="IdTheLoai" id="IdTheLoai">
                             @foreach ($Category as $item)
-                                <option value="{{$item->Ten}}" @if (old('TheLoai') == $item->Ten) selected="selected" @endif>{{$item->Ten}}</option>
+                                <option value="{{$item->id}}" @if (old('IdTheLoai') == $item->id) selected="selected" @endif>{{$item->Ten}}</option>
                             @endforeach
                         </select>
-                        @error('TheLoai')
+                        @error('IdTheLoai')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label>Loại Tin</label>
-                        <select class="form-control" name="LoaiTin" id="LoaiTin">
+                        <select class="form-control" name="IdLoaiTin" id="IdLoaiTin">
                             @foreach ($KindOfNews as $item)
-                                <option value="{{$item->Ten}}" @if (old('LoaiTin') == $item->Ten) selected="selected" @endif>{{$item->Ten}}</option>
+                                <option value="{{$item->id}}" @if (old('IdLoaiTin') == $item->id) selected="selected" @endif>{{$item->Ten}}</option>
                             @endforeach
                         </select>
-                        @error('LoaiTin')
+                        @error('IdLoaiTin')
                             <small class="form-text text-danger text-uppercase alert">{{ $message }}</small>
                         @enderror
                     </div>
@@ -77,10 +77,10 @@
                     <div class="form-group">
                         <label>Nổi Bật</label>
                         <label class="radio-inline">
-                            <input name="NoiBat" value="0" checked="" type="radio">Không
+                            <input name="NoiBat" value="0" checked='' {{ old('NoiBat')=="0" ? 'checked='.'"checked"' : '' }} type="radio">Không
                         </label>
                         <label class="radio-inline">
-                            <input name="NoiBat" value="1" type="radio">Có
+                            <input name="NoiBat" value="1"  {{ old('NoiBat')=="1" ? 'checked='.'"checked"' : '' }} type="radio">Có
                         </label>
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>

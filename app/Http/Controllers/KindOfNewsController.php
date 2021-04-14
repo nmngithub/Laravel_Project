@@ -12,7 +12,8 @@ class KindOfNewsController extends Controller
 {
     public function getList(){
         $KindOfNews = KindOfNews::all()->sortByDesc('created_at');
-        return view('admin.kindofnews.list',['KindOfNews'=>$KindOfNews]);
+        $Category = Category::all();
+        return view('admin.kindofnews.list',['KindOfNews'=>$KindOfNews, 'Category'=>$Category]);
     }
 
     public function getAdd(){
@@ -22,9 +23,10 @@ class KindOfNewsController extends Controller
     public function postAdd(RequestKindOfNews $req){ 
         $KindOfNews = new KindOfNews;
 
-        $KindOfNews->TheLoai = $req->TheLoai;
+        $KindOfNews->IdTheLoai = $req->IdTheLoai;
         $KindOfNews->Ten = $req->Ten;
         $KindOfNews->TenKhongDau = changeTitle($req->Ten);
+
         $KindOfNews->save();
 
         return redirect()->back()->with('notification','Đã thêm thành công!');
@@ -39,10 +41,11 @@ class KindOfNewsController extends Controller
     }
     public function postEdit(RequestKindOfNews $req, $id){
         $KindOfNews = KindOfNews::find($id);
+    
+        $KindOfNews->IdTheLoai = $req->IdTheLoai;
         $KindOfNews->Ten = $req->Ten;
         $KindOfNews->TenKhongDau = changeTitle($req->Ten);
-        
-        
+
         $KindOfNews->save();
 
         return redirect()->back()->with('notification','Đã sửa Thành Công!');   
@@ -51,7 +54,7 @@ class KindOfNewsController extends Controller
     public function getDelete($id) {
 
     	$KindOfNews = KindOfNews::find($id);
-        $Detail = Detail::where('LoaiTin',$KindOfNews->Ten);
+        $Detail = Detail::where('IdLoaiTin',$id);
         $Detail->delete();
     	$KindOfNews->delete();
     	return redirect()->back()->with('notification','Đã xóa thành công!');

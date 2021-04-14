@@ -50,19 +50,19 @@
                     <div class="form-group">
                         <label>Quyền Người Dùng</label>
                         <label class="radio-inline">
-                            <input name="quyen" value="0" checked="" type="radio">User
+                            <input name="quyen" value="0" checked="" {{old('quyen')=="0" ? 'checked='.'"checked"':''}} type="radio">User
                         </label>
                         <label class="radio-inline">
-                            <input name="quyen" value="1" type="radio">Admin
+                            <input name="quyen" value="1" type="radio" {{old('quyen')=="1" ? 'checked='.'"checked"':''}}>Admin
                         </label>
                     </div>
                     <div class="form-group">
                         <label>Block Or Not</label>
                         <label class="radio-inline">
-                            <input name="block" value="0" checked="" type="radio">Not Block
+                            <input name="block" value="0" checked="" {{old('block')=="0" ? 'checked='.'"checked"':''}} type="radio">Not Block
                         </label>
                         <label class="radio-inline">
-                            <input name="block" value="1" type="radio">Block
+                            <input name="block" value="1" type="radio" {{old('block')=="1" ? 'checked='.'"checked"':''}}>Block
                         </label>
                     </div>
                     <button type="submit" class="btn btn-default">Save</button>

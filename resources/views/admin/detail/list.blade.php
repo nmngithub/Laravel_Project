@@ -41,8 +41,18 @@
                             </td>
                             <td>{{$item->TomTat}}</td>
                             <td>{{$item->NoiDung}}</td>
-                            <td>{{$item->TheLoai}}</td>
-                            <td>{{$item->LoaiTin}}</td>
+                            @foreach ($Category as $itemCat)
+                                @if ($item->IdTheLoai == $itemCat->id)
+                                <td>{{$itemCat->Ten}}</td>
+                                @endif
+                            @endforeach
+                            
+                            @foreach ($KindOfNews as $itemKON)
+                                @if ($item->IdLoaiTin == $itemKON->id)
+                                    <td>{{$itemKON->Ten}}</td>
+                                @endif
+                            @endforeach
+                         
                             <td>
                                 @if ($item->NoiBat == 0)
                                     {{'Không'}}

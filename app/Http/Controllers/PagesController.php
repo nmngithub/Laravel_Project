@@ -21,13 +21,13 @@ class PagesController extends Controller
         $Category = Category::all()->sortBy('Ten');
         $slide = Slide::all();
         $Detail = Detail::all()->sortByDesc('created_at');
-        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->sortBy('Ten')->toArray();
+        $KindOfNews = KindOfNews::select('IdTheLoai','Ten')->get()->sortBy('Ten')->toArray();
 
         $KON = [];
   
         foreach($KindOfNews as $key => $value)
         {
-            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
+            $KON[$value['IdTheLoai']][$value['_id']] = $value['Ten'];
         }
 
         return view('pages.trangchu',['slide'=>$slide,'Category'=>$Category,'KON'=>$KON,'Detail'=>$Detail]);
@@ -37,13 +37,13 @@ class PagesController extends Controller
         $Category = Category::all()->sortBy('Ten');
         $slide = Slide::all();
        
-        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KindOfNews = KindOfNews::select('IdTheLoai','Ten')->get()->toArray();
 
         $KON = [];
   
         foreach($KindOfNews as $key => $value)
         {
-            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
+            $KON[$value['IdTheLoai']][$value['_id']] = $value['Ten'];
         }
         return view('pages.about',['slide'=>$slide,'Category'=>$Category,'KON'=>$KON]);
     }
@@ -51,36 +51,37 @@ class PagesController extends Controller
         $Category = Category::all()->sortBy('Ten');
         $slide = Slide::all();
        
-        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KindOfNews = KindOfNews::select('IdTheLoai','Ten')->get()->toArray();
 
         $KON = [];
   
         foreach($KindOfNews as $key => $value)
         {
-            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
+            $KON[$value['IdTheLoai']][$value['_id']] = $value['Ten'];
         }
         return view('pages.contact',['slide'=>$slide,'Category'=>$Category,'KON'=>$KON]);
     }
 
     public function kindofnews($Ten){
-        $KindOfNews1 = KindOfNews::where('Ten',$Ten)->get();
-        $Detail = Detail::where('LoaiTin',$Ten)->orderBy('created_at', 'desc')->paginate(3);
+        $KindOfNews1 = KindOfNews::where('Ten',$Ten)->get()->first();
+        $Detail = Detail::where('IdLoaiTin',$KindOfNews1->id)->orderBy('created_at', 'desc')->paginate(3);
         $Category = Category::all();
-        $KindOfNews2 = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KindOfNews2 = KindOfNews::select('IdTheLoai','Ten')->get()->toArray();
 
         $KON = [];
   
         foreach($KindOfNews2 as $key => $value)
         {
-            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
+            $KON[$value['IdTheLoai']][$value['_id']] = $value['Ten'];
         }
+        
         return view('pages.kindofnews',['KindOfNews'=>$KindOfNews1,'Category'=>$Category,'Detail'=>$Detail,'KON'=>$KON]);
     }
 
     public function detail($id){
         $Detail = Detail::find($id);
         $tinnoibat = Detail::where('NoiBat', 1)->orderBy('created_at', 'DESC')->limit(3)->get(); 
-        $tinlienquan = Detail::where('LoaiTin',$Detail->LoaiTin)->where('_id','<>',$id)->get()->sortByDesc('created_at')->take(3);
+        $tinlienquan = Detail::where('IdLoaiTin',$Detail->IdLoaiTin)->where('_id','<>',$id)->orderBy('created_at', 'DESC')->limit(3)->get();
 
         //Comment, Users
         $users = Users::select('name')->get()->toArray();
@@ -143,9 +144,9 @@ class PagesController extends Controller
         $users = new Users;
         $users->name = $req->name;
         $users->email = $req->email;
+        $users->password = bcrypt($req->password);
         $users->quyen = 0;
         $users->block = 0;
-        $users->password = bcrypt($req->password);
 
         $users->save();
         return redirect()->back()->with('notification','Đăng ký thành công!');
@@ -170,13 +171,13 @@ class PagesController extends Controller
     public function search(Request $req){
         $Category = Category::all()->sortBy('Ten');
     
-        $KindOfNews = KindOfNews::select('TheLoai','Ten')->get()->toArray();
+        $KindOfNews = KindOfNews::select('IdTheLoai','Ten')->get()->toArray();
 
         $KON = [];
   
         foreach($KindOfNews as $key => $value)
         {
-            $KON[$value['TheLoai']][$value['_id']] = $value['Ten'];
+            $KON[$value['IdTheLoai']][$value['_id']] = $value['Ten'];
         }
         $keywords = $req->keywords;
         $Detail = Detail::where('Tieude','like',"%$keywords%")->orWhere('TomTat','like',"%$keywords%")->orWhere('NoiDung','like',"%$keywords%")->orderBy('created_at', 'desc')->paginate(5);

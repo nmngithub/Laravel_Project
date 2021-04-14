@@ -49,8 +49,8 @@ class CategoryController extends Controller
     public function getDelete($id){
         $Category = Category::find($id);
 
-        $KindOfNews = KindOfNews::where('TheLoai',$Category->Ten);
-        $Detail = Detail::where('TheLoai', $Category->Ten);
+        $KindOfNews = KindOfNews::where('IdTheLoai',$id);
+        $Detail = Detail::where('IdTheLoai', $id);
 
         $Detail->delete();
         $KindOfNews->delete();

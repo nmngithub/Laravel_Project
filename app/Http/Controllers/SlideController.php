@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\RequestSlide;
 use Illuminate\Support\Str;
@@ -29,12 +29,11 @@ class SlideController extends Controller
                 return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
-            $Hinh = Str::random(4)."_".$name;
-            while(file_exists('upload/slide'.$Hinh)){
-                $Hinh = Str::random(4)."_".$name;
+            while(file_exists('upload/slide/'.$name)){
+                $name = Str::random(4)."_".$name;
             }
-            $file->move('upload/slide',$Hinh);
-            $slide->Hinh = $Hinh;
+            $file->move('upload/slide',$name);
+            $slide->Hinh = $name;
         } else{
             $slide->Hinh ="";
         }
@@ -43,7 +42,6 @@ class SlideController extends Controller
 
         if($req->has('Link'))
         $slide->link = $req->Link;
-
         $slide->save();
 
         return  redirect()->back()->with('notification', 'Đã Thêm Thành Công!');
@@ -62,20 +60,19 @@ class SlideController extends Controller
         $slide->link = $req->Link;
 
         if($req->hasFile('Hinh')){
+            unlink('upload/slide/'.$slide->Hinh); 
             $file = $req->file('Hinh');
             $format = $file->getClientOriginalExtension();
             if($format != 'jpg' && $format != 'png'){
                 return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
-            $Hinh = Str::random(4)."_".$name;
-            while(file_exists('upload/slide'.$Hinh)){
-                unlink('upload/slide/'.$slide->Hinh);
-                $Hinh = Str::random(4)."_".$name;
+            while(file_exists('upload/slide/'.$name)){
+                $name = Str::random(4)."_".$name;
             }
-            $file->move('upload/slide',$Hinh);
+            $file->move('upload/slide',$name);
 
-            $slide->Hinh = $Hinh;
+            $slide->Hinh = $name;
         }
        
         $slide->save();

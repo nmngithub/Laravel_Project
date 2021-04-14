@@ -5,15 +5,11 @@
     <div class="container">
         <div class="row">
             @include('layout.menu')
-
             <div class="col-md-9 ">
                 <div class="panel panel-default">
-                    @foreach ($KindOfNews as $item)
                         <div class="panel-heading" style="background-color:#337AB7; color:white;">
-                            <h4><b>{{$item->Ten}}</b></h4>
+                            <h4><b>{{$KindOfNews->Ten}}</b></h4>
                         </div>
-                    @endforeach
-                 
                     @foreach ($Detail->sortByDesc('created_at') as $item)
                         <div class="row-item row">
                             <div class="col-md-3">
