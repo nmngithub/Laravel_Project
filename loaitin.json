@@ -1,0 +1,23 @@
+{"_id":{"$oid":"604aceeeb87e27c1f289b9a7"},"TheLoai":"Xã Hội","Ten":"Giáo Dục","TenKhongDau":"Giao-Duc","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9a8"},"TheLoai":"Xã Hội","Ten":"Du Học","TenKhongDau":"Du-Hoc","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9a9"},"TheLoai":"Xã Hội","Ten":"Nhịp Điệu Trẻ","TenKhongDau":"Nhip-Dieu-Tre","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9aa"},"TheLoai":"Thế Giới","Ten":"Cuộc Sống Đó Đây","TenKhongDau":"Cuoc-Song-Do-Day","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9ab"},"TheLoai":"Thế Giới","Ten":"Người Việt 5 Châu","TenKhongDau":"Nguoi-Viet-5-Chau","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9ac"},"TheLoai":"Kinh Doanh","Ten":"Chứng Khoán","TenKhongDau":"Chung-Khoan","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9ad"},"TheLoai":"Thế Giới","Ten":"Phân Tích","TenKhongDau":"Phan-Tich","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9ae"},"TheLoai":"Xã Hội","Ten":"Du Lịch","TenKhongDau":"Du-Lich","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9af"},"TheLoai":"Thế Giới","Ten":"Ảnh","TenKhongDau":"","created_at":"NULL","updated_at":"2021-02-26 15:44:51"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b0"},"TheLoai":"Kinh Doanh","Ten":"Bất Động Sản","TenKhongDau":"Bat-Dong-San","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b1"},"TheLoai":"Kinh Doanh","Ten":"Doanh Nhân","TenKhongDau":"Doanh-Nhan","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b2"},"TheLoai":"Kinh Doanh","Ten":"Quốc Tế","TenKhongDau":"Quoc-Te","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b3"},"TheLoai":"Kinh Doanh","Ten":"Mua Sắm","TenKhongDau":"Mua-Sam","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b4"},"TheLoai":"Kinh Doanh","Ten":"Doanh Nghiệp Viết","TenKhongDau":"Doanh-Nghiep-Viet","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b5"},"TheLoai":"Văn Hoá","Ten":"Hoa Hậu","TenKhongDau":"Hoa-Hau","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b6"},"TheLoai":"Văn Hoá","Ten":"Nghệ Sỹ","TenKhongDau":"Nghe-Sy","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b7"},"TheLoai":"Văn Hoá","Ten":"Âm Nhạc","TenKhongDau":"Am-Nhac","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b8"},"TheLoai":"Văn Hoá","Ten":"Thời Trang","TenKhongDau":"Thoi-Trang","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9b9"},"TheLoai":"Văn Hoá","Ten":"Mỹ Thuật","TenKhongDau":"My-Thuat","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9ba"},"TheLoai":"Văn Hoá","Ten":"Điện Ảnh","TenKhongDau":"Dien-Anh","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9bb"},"TheLoai":"Thể Thao","Ten":"Bóng Đá","TenKhongDau":"Bong-Da","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"604aceeeb87e27c1f289b9bc"},"TheLoai":"Thể Thao","Ten":"Tennis 1","TenKhongDau":"","created_at":"NULL","updated_at":"2021-02-26 15:45:58"}
+{"_id":{"$oid":"604b1d666a6a0000b9001012"},"TheLoai":"Thể Thao","Ten":"Karate","TenKhongDau":"karate","updated_at":{"$date":"2021-03-12T07:51:02.628Z"},"created_at":{"$date":"2021-03-12T07:51:02.628Z"}}

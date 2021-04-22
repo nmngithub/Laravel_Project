@@ -37,10 +37,10 @@ class CategoryController extends Controller
 
     public function postEdit(RequestCategory $req, $id){
         $Category = Category::find($id);
-     
+
         $Category->Ten = $req->Ten;
         $Category->TenKhongDau = changeTitle($req->Ten);
-        
+
         $Category->save();
 
         return redirect()->back()->with('notification','Đã sửa thành công!');

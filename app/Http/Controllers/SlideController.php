@@ -45,7 +45,7 @@ class SlideController extends Controller
         $slide->save();
 
         return  redirect()->back()->with('notification', 'Đã Thêm Thành Công!');
-       
+
     }
 
     public function getEdit($id){
@@ -60,12 +60,12 @@ class SlideController extends Controller
         $slide->link = $req->Link;
 
         if($req->hasFile('Hinh')){
-            unlink('upload/slide/'.$slide->Hinh); 
             $file = $req->file('Hinh');
             $format = $file->getClientOriginalExtension();
             if($format != 'jpg' && $format != 'png'){
                 return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
+            unlink('upload/slide/'.$slide->Hinh);
             $name = $file->getClientOriginalName();
             while(file_exists('upload/slide/'.$name)){
                 $name = Str::random(4)."_".$name;
@@ -74,7 +74,7 @@ class SlideController extends Controller
 
             $slide->Hinh = $name;
         }
-       
+
         $slide->save();
 
         return redirect()->back()->with('notification','Đã sửa Thành Công!');

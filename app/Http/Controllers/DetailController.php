@@ -40,12 +40,11 @@ class DetailController extends Controller
                 return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
             $name = $file->getClientOriginalName();
-            $Hinh = Str::random(4)."_".$name;
             while(file_exists('upload/tintuc/'.$name)){
-                $Hinh = Str::random(4)."_".$name;
+                $name = Str::random(4)."_".$name;
             }
-            $file->move('upload/tintuc',$Hinh);
-            $Detail->Hinh = $Hinh;
+            $file->move('upload/tintuc',$name);
+            $Detail->Hinh = $name;
         } else{
             $Detail->Hinh ="";
         }
@@ -72,26 +71,26 @@ class DetailController extends Controller
         $Detail->TomTat = $req->TomTat;
         $Detail->NoiDung = $req->NoiDung;
         if($req->hasFile('Hinh')){
+
             $file = $req->file('Hinh');
             $format = $file->getClientOriginalExtension();
             if($format != 'jpg' && $format != 'png'){
                 return redirect()->back()->with('notification','Hình ảnh phải có định dạng là jpg hoặc png!');
             }
+            unlink('upload/tintuc/'.$name);
             $name = $file->getClientOriginalName();
-            $Hinh = Str::random(4)."_".$name;
             while(file_exists('upload/tintuc/'.$name)){
-                unlink('upload/tintuc/'.$tintuc->name);
-                $Hinh = Str::random(4)."_".$name;
+                $name = Str::random(4)."_".$name;
             }
-            $file->move('upload/tintuc',$Hinh);
-            
-            
-            $Detail->Hinh = $Hinh;
+            $file->move('upload/tintuc',$name);
+
+
+            $Detail->Hinh = $name;
         }
         $Detail->NoiBat = (int) $req->NoiBat;
         $Detail->IdTheLoai = $req->IdTheLoai;
         $Detail->IdLoaiTin = $req->IdLoaiTin;
-        
+
         $Detail->save();
 
         return redirect()->back()->with('notification','Đã sửa Thành Công!');

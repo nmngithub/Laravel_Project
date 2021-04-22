@@ -1,0 +1,5 @@
+{"_id":{"$oid":"6049d52d98fd230a5398e7a1"},"Ten":"Kinh Doanh","TenKhongDau":"Kinh-Doanh","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"6049d52d98fd230a5398e7a2"},"Ten":"Văn Hoá","TenKhongDau":"Van-Hoa","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"6049d52d98fd230a5398e7a3"},"Ten":"Thể Thao","TenKhongDau":"The-Thao","created_at":"NULL","updated_at":"NULL"}
+{"_id":{"$oid":"6049d52d98fd230a5398e7a5"},"Ten":"Xã Hội","TenKhongDau":"xa-hoi","created_at":"NULL","updated_at":"2021-02-26 11:17:10"}
+{"_id":{"$oid":"6049d52d98fd230a5398e7a9"},"Ten":"Thế Giới","TenKhongDau":"The-Gioi","created_at":"NULL","updated_at":"NULL"}
